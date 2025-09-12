@@ -1,0 +1,80 @@
+/* src/app/room-list/room-list.component.css */
+
+.room-list-container {
+  padding: 40px 20px;
+  text-align: center;
+  background-color: #f0f0f0; /* Fondo gris claro para la sección completa */
+  margin-top: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  color: #333; /* Color de texto oscuro para la sección */
+}
+
+.room-list-container h2 {
+  font-size: 2.5em;
+  color: #000000; /* Azul para el título principal */
+  margin-bottom: 40px;
+}
+
+.room-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.room-card {
+  max-width: 400px;
+  margin: auto;
+  transition: transform 0.2s ease-in-out;
+  background-color: #ffffff; /* ¡Fondo BLANCO para la tarjeta! */
+  color: #333; /* ¡Color de texto oscuro para el contenido de la tarjeta! */
+  border: 1px solid #ddd; /* Un borde sutil para que se vea la tarjeta */
+  border-radius: 8px;
+  overflow: hidden; /* Asegura que los bordes redondeados se apliquen bien */
+}
+
+.room-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+mat-card-header {
+  background-color: #22aeb0; /* Fondo azul para el encabezado */
+  color: white; /* Letras blancas para el encabezado */
+  padding: 16px;
+  /* border-top-left-radius: 8px; /* Estos ya se manejan en .room-card si hay overflow: hidden */
+  /* border-top-right-radius: 8px; */
+}
+
+mat-card-title {
+  font-size: 1.5em;
+}
+
+mat-card-subtitle {
+  color: rgba(255, 255, 255, 0.8); /* Subtítulo blanco o gris claro */
+}
+
+mat-card-content {
+  padding: 16px;
+  color: #555; /* Color de texto oscuro para el contenido */
+}
+
+mat-card-actions {
+  padding: 8px 16px 16px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+/* Estilos para los botones (opcional, si quieres personalizarlos más allá del tema Material) */
+button.mat-raised-button {
+  background-color: #28a745; /* Ejemplo: botón primario verde */
+  color: white;
+}
+
+button.mat-button {
+  color: #18c1b5; /* Ejemplo: botón secundario azul */
+}

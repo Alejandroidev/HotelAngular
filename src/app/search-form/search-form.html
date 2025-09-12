@@ -1,0 +1,45 @@
+<form [formGroup]="searchForm" (ngSubmit)="onSubmit()" class="search-form-container">
+  <mat-form-field appearance="fill">
+    <mat-label>Fecha de Check-in</mat-label>
+    <input matInput [matDatepicker]="checkInPicker" formControlName="checkInDate">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="checkInPicker"></mat-datepicker-toggle>
+    <mat-datepicker #checkInPicker></mat-datepicker>
+    <mat-error *ngIf="searchForm.get('checkInDate')?.hasError('required') && searchForm.get('checkInDate')?.touched">
+      La fecha de check-in es requerida.
+    </mat-error>
+    <mat-error *ngIf="searchForm.get('checkInDate')?.hasError('pastDate') && searchForm.get('checkInDate')?.touched">
+      La fecha de check-in no puede ser pasada.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Fecha de Check-out</mat-label>
+    <input matInput [matDatepicker]="checkOutPicker" formControlName="checkOutDate">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="checkOutPicker"></mat-datepicker-toggle>
+    <mat-datepicker #checkOutPicker></mat-datepicker>
+    <mat-error *ngIf="searchForm.get('checkOutDate')?.hasError('required') && searchForm.get('checkOutDate')?.touched">
+      La fecha de check-out es requerida.
+    </mat-error>
+    <mat-error *ngIf="searchForm.hasError('dateRangeInvalid') && searchForm.get('checkOutDate')?.touched">
+      La fecha de check-out debe ser igual o posterior a la de check-in.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Número de Huéspedes</mat-label>
+    <input matInput type="number" formControlName="guests" min="1">
+    <mat-icon matSuffix>people</mat-icon>
+    <mat-error *ngIf="searchForm.get('guests')?.hasError('required') && searchForm.get('guests')?.touched">
+      El número de huéspedes es requerido.
+    </mat-error>
+    <mat-error *ngIf="searchForm.get('guests')?.hasError('min') && searchForm.get('guests')?.touched">
+      Debe haber al menos 1 huésped.
+    </mat-error>
+  </mat-form-field>
+
+  <button mat-raised-button color="accent" type="submit" [disabled]="!searchForm.valid">
+    Buscar Habitaciones
+  </button>
+</form>

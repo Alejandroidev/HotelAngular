@@ -1,0 +1,25 @@
+.search-form-container {
+  display: flex;
+  flex-wrap: wrap; 
+  gap: 20px; 
+  justify-content: center;
+  align-items: flex-end; 
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f9f9f9; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 900px; 
+  margin: 0 auto; 
+}
+
+.search-form-container mat-form-field {
+  flex: 1 1 auto; 
+  min-width: 200px; 
+}
+
+.search-form-container button {
+  flex-shrink: 0; 
+  padding: 0.8em 2em;
+  height: 56px; 
+  font-size: 1.1em;
+}

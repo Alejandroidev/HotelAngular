@@ -1,0 +1,23 @@
+<div class="room-list-container">
+  <h2>Nuestras Habitaciones Disponibles</h2>
+  <div *ngIf="rooms.length === 0">
+    <p>Cargando habitaciones o no hay habitaciones disponibles...</p>
+  </div>
+  <div class="room-grid">
+    <mat-card *ngFor="let room of rooms" class="room-card">
+      <mat-card-header>
+        <mat-card-title>Habitación {{ room.number }}</mat-card-title>
+        <mat-card-subtitle>Piso: {{ room.floor }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p><strong>Capacidad:</strong> {{ room.capacity }} personas</p>
+        <p><strong>Precio por noche:</strong> ${{ room.price | number:'1.2-2' }}</p>
+        <p *ngIf="room.roomType"><strong>Tipo:</strong> {{ room.roomType.name }}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary">Ver Detalles</button>
+        <button mat-button color="accent">Reservar</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
