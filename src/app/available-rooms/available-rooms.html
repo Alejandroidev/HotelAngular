@@ -1,0 +1,98 @@
+<div class="available-rooms-page">
+  <header class="page-header">
+    <h1>Buscar Habitaciones Disponibles</h1>
+    <p>Encuentra la habitación perfecta para tus fechas</p>
+  </header>
+
+  <section class="search-section">
+    <form class="search-form" (ngSubmit)="searchAvailableRooms()">
+      <div class="form-group">
+        <label for="checkIn">Fecha de Entrada</label>
+        <input 
+          type="date" 
+          id="checkIn" 
+          name="checkIn"
+          [(ngModel)]="checkIn"
+          [min]="minDate"
+          (change)="onCheckInChange()"
+          required>
+      </div>
+
+      <div class="form-group">
+        <label for="checkOut">Fecha de Salida</label>
+        <input 
+          type="date" 
+          id="checkOut" 
+          name="checkOut"
+          [(ngModel)]="checkOut"
+          [min]="checkIn"
+          required>
+      </div>
+
+      <div class="form-group">
+        <label for="guests">Número de Huéspedes</label>
+        <input 
+          type="number" 
+          id="guests" 
+          name="guests"
+          [(ngModel)]="guests"
+          min="1"
+          max="10"
+          required>
+      </div>
+
+      <button type="submit" class="search-btn" [disabled]="isLoading">
+        <span *ngIf="!isLoading">🔍 Buscar</span>
+        <span *ngIf="isLoading">Buscando...</span>
+      </button>
+    </form>
+
+    <div class="error-message" *ngIf="errorMessage">
+      ⚠️ {{ errorMessage }}
+    </div>
+  </section>
+
+  <section class="results-section" *ngIf="hasSearched">
+    <h2>Resultados de Búsqueda</h2>
+    
+    <div class="results-info" *ngIf="!isLoading">
+      <p *ngIf="availableRooms.length > 0">
+        Se encontraron <strong>{{ availableRooms.length }}</strong> habitación(es) disponible(s)
+      </p>
+      <p *ngIf="availableRooms.length === 0" class="no-results">
+        No se encontraron habitaciones disponibles para las fechas seleccionadas
+      </p>
+    </div>
+
+    <div class="rooms-grid">
+      <div *ngFor="let room of availableRooms" class="room-card" [class.featured]="room.isFeatured">
+        <div class="featured-badge" *ngIf="room.isFeatured">
+          ⭐ Destacada
+        </div>
+        
+        <div class="room-header">
+          <h3>{{ room.name }}</h3>
+        </div>
+        
+        <div class="room-description">
+          <p>{{ room.description }}</p>
+        </div>
+        
+        <div class="room-details">
+          <div class="price-tag">
+            <span class="currency">$</span>
+            <span class="price">{{ room.price | number:'1.0-0' }}</span>
+            <span class="period">/noche</span>
+          </div>
+          
+          <div class="room-info">
+            <p><strong>Capacidad:</strong> {{ room.capacity }} persona(s)</p>
+            <p><strong>Tipo ID:</strong> {{ room.typeRoomId.substring(0, 8) }}...</p>
+          </div>
+        </div>
+        
+        <button class="reserve-btn">Reservar Ahora</button>
+      </div>
+    </div>
+  </section>
+</div>

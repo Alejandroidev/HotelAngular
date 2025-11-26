@@ -1,0 +1,37 @@
+<section class="cheapest-rooms-section">
+  <h2>Habitaciones Más Económicas por Tipo</h2>
+  
+  <div class="rooms-container">
+    <div *ngIf="cheapestRooms.length === 0" class="no-rooms">
+      <p>Esperando datos del servidor...</p>
+    </div>
+    
+    <div *ngFor="let room of cheapestRooms" class="room-card" [class.featured]="room.isFeatured">
+      <div class="featured-badge" *ngIf="room.isFeatured">
+        ⭐ Destacada
+      </div>
+      
+      <div class="room-header">
+        <h3>{{ room.name }}</h3>
+      </div>
+      
+      <div class="room-description">
+        <p>{{ room.description }}</p>
+      </div>
+      
+      <div class="room-details">
+        <div class="price-tag">
+          <span class="currency">$</span>
+          <span class="price">{{ room.price | number:'1.0-0' }}</span>
+          <span class="period">/noche</span>
+        </div>
+        
+        <div class="room-info">
+          <p><strong>Capacidad:</strong> {{ room.capacity }} persona(s)</p>
+        </div>
+      </div>
+      
+      <button class="reserve-btn">Reservar Ahora</button>
+    </div>
+  </div>
+</section>

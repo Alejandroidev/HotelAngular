@@ -1,10 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
-import { MatButtonModule } from '@angular/material/button';
-import { SearchForm } from './search-form/search-form'; 
-import { ImageGallery } from './image-gallery/image-gallery'; 
-import { RoomListComponent } from './room-list/room-list'; 
+import { RouterOutlet, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -12,10 +8,7 @@ import { RoomListComponent } from './room-list/room-list';
   imports: [
     CommonModule,
     RouterOutlet,
-    MatButtonModule, 
-    SearchForm, 
-    ImageGallery,
-    RoomListComponent
+    RouterLink
   ],
   templateUrl: './app.html',
   styleUrls: ['./app.css']

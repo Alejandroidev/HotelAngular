@@ -1,0 +1,21 @@
+/* Estilos específicos para el componente home */
+
+.hero-section {
+  text-align: center;
+}
+
+.hero-section h1,
+.hero-section p {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.booking-form-section {
+  text-align: center;
+}
+
+.booking-form-section h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}

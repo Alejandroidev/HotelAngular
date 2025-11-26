@@ -1,0 +1,52 @@
+<div class="rooms-page">
+  <header class="page-header">
+    <h1>Nuestras Habitaciones</h1>
+    <p>Explora todas nuestras opciones de alojamiento</p>
+  </header>
+
+  <section class="rooms-section">
+    <div class="loading-message" *ngIf="isLoading">
+      <p>⏳ Cargando habitaciones...</p>
+    </div>
+
+    <div class="rooms-grid" *ngIf="!isLoading">
+      <div *ngFor="let room of allRooms" class="room-card" [class.featured]="room.isFeatured">
+        <div class="featured-badge" *ngIf="room.isFeatured">
+          ⭐ Destacada
+        </div>
+        
+        <div class="room-header">
+          <h3>{{ room.name }}</h3>
+        </div>
+        
+        <div class="room-description">
+          <p>{{ room.description }}</p>
+        </div>
+        
+        <div class="room-details">
+          <div class="price-tag">
+            <span class="currency">$</span>
+            <span class="price">{{ room.price | number:'1.0-0' }}</span>
+            <span class="period">/noche</span>
+          </div>
+          
+          <div class="room-info">
+            <p><strong>Capacidad:</strong> {{ room.capacity }} persona(s)</p>
+            <p><strong>Tipo:</strong> {{ room.typeRoomId.substring(0, 8) }}...</p>
+          </div>
+        </div>
+        
+        <div class="action-buttons">
+          <button class="availability-btn" (click)="searchAvailability(room)">
+            🔍 Buscar Disponibilidad
+          </button>
+          <button class="reserve-btn">Reservar Ahora</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="empty-message" *ngIf="!isLoading && allRooms.length === 0">
+      <p>No hay habitaciones disponibles en este momento.</p>
+    </div>
+  </section>
+</div>

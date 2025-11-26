@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common'; 
-import { FormsModule, ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms'; 
+import { FormsModule, ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 // Módulos de Angular Material
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -34,11 +35,37 @@ export class SearchForm {
     guests: new FormControl(1), 
   });
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   onSubmit() {
     if (this.searchForm.valid) {
-      console.log('Formulario de búsqueda enviado:', this.searchForm.value);
+      const checkIn = this.searchForm.value.checkInDate;
+      const checkOut = this.searchForm.value.checkOutDate;
+      const guests = this.searchForm.value.guests || 1;
+
+      if (checkIn && checkOut) {
+        // Formatear fechas a yyyy-MM-dd
+        const checkInStr = this.formatDate(checkIn);
+        const checkOutStr = this.formatDate(checkOut);
+
+        // Navegar a la página de disponibilidad con parámetros
+        this.router.navigate(['/disponibilidad'], {
+          queryParams: {
+            checkIn: checkInStr,
+            checkOut: checkOutStr,
+            guests: guests
+          }
+        });
+      } else {
+        console.warn('Por favor seleccione fechas de entrada y salida');
+      }
     }
+  }
+
+  private formatDate(date: Date): string {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
   }
 }

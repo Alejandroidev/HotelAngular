@@ -1,8 +1,8 @@
 <header>
   <div class="logo">Hotel U Colombia</div>
   <nav>
-    <a href="#">Inicio</a>
-    <a href="#">Habitaciones</a>
+    <a routerLink="/">Inicio</a>
+    <a routerLink="/habitaciones">Habitaciones</a>
     <a href="#">Servicios</a>
     <a href="#">Galería</a>
     <a href="#">Contacto</a>
@@ -10,27 +10,8 @@
   </nav>
 </header>
 
-<main>
-  <section class="hero-section">
-    <h1>Bienvenido a Hotel U Colombia</h1>
-    <p>Tu oasis de tranquilidad en el corazón de la ciudad.</p>
-    <button>Explora nuestras habitaciones</button>
-    <br><br>
-    <button mat-raised-button color="primary">Botón Material</button>
-  </section>
-
-  <section class="booking-form-section">
-    <h2>Encuentra tu Habitación Ideal</h2>
-    <app-search-form></app-search-form> 
-  </section>
-
-</main>
-<main>
-  <app-image-gallery></app-image-gallery>
-
-  <app-room-list></app-room-list>
-
-</main>
+<!-- Router Outlet para las rutas -->
+<router-outlet></router-outlet>
 
 
 <footer>

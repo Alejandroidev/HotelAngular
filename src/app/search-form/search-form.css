@@ -22,4 +22,6 @@
   padding: 0.8em 2em;
   height: 56px; 
   font-size: 1.1em;
+  white-space: nowrap;
+  min-width: fit-content;
 }
