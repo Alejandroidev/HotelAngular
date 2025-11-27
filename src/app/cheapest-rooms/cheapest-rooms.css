@@ -1,11 +1,11 @@
 .cheapest-rooms-section {
   padding: 40px 20px;
-  background-color: #f8f9fa;
+  background-color: var(--color-fondo-claro);
 }
 
 .cheapest-rooms-section h2 {
   text-align: center;
-  color: #333;
+  color: var(--color-primario);
   margin-bottom: 30px;
   font-size: 2em;
   font-weight: 600;
@@ -67,21 +67,21 @@
 }
 
 .room-card.featured {
-  border: 2px solid #f39c12;
-  box-shadow: 0 6px 12px rgba(243, 156, 18, 0.3);
+  border: 2px solid var(--color-acento);
+  box-shadow: 0 6px 12px rgba(224, 122, 95, 0.3);
 }
 
 .featured-badge {
   position: absolute;
   top: -10px;
   right: 15px;
-  background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+  background: linear-gradient(135deg, var(--color-acento) 0%, var(--color-secundario) 100%);
   color: white;
   padding: 5px 15px;
   border-radius: 20px;
   font-size: 0.85em;
   font-weight: 600;
-  box-shadow: 0 2px 8px rgba(243, 156, 18, 0.4);
+  box-shadow: 0 2px 8px rgba(224, 122, 95, 0.4);
 }
 
 .room-card:hover {
@@ -100,14 +100,14 @@
 
 .room-header h3 {
   margin: 0;
-  color: #2c3e50;
+  color: var(--color-primario);
   font-size: 1.4em;
   font-weight: 600;
 }
 
 .room-description {
   margin-bottom: 20px;
-  color: #666;
+  color: var(--color-texto);
   font-size: 0.95em;
   line-height: 1.5;
   min-height: 45px;
@@ -122,7 +122,7 @@
 }
 
 .price-tag {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, var(--color-primario) 0%, var(--color-secundario) 100%);
   color: white;
   padding: 15px;
   border-radius: 8px;
@@ -150,7 +150,7 @@
 }
 
 .room-info {
-  background-color: #f8f9fa;
+  background-color: var(--color-fondo-claro);
   padding: 15px;
   border-radius: 8px;
   margin-bottom: 20px;
@@ -158,17 +158,24 @@
 
 .room-info p {
   margin: 8px 0;
-  color: #555;
+  color: var(--color-texto);
   font-size: 0.95em;
 }
 
 .room-info strong {
-  color: #333;
+  color: var(--color-primario);
   font-weight: 600;
 }
 
-.reserve-btn {
-  background-color: #27ae60;
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.availability-btn {
+  background: linear-gradient(135deg, var(--color-primario) 0%, var(--color-secundario) 100%);
   color: white;
   border: none;
   padding: 12px 24px;
@@ -176,12 +183,35 @@
   font-size: 1em;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  width: 100%;
+}
+
+.availability-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(14, 58, 71, 0.4);
+}
+
+.availability-btn:active {
+  transform: scale(0.98);
+}
+
+.reserve-btn {
+  background: linear-gradient(135deg, var(--color-acento) 0%, var(--color-secundario) 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   width: 100%;
 }
 
 .reserve-btn:hover {
-  background-color: #229954;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(224, 122, 95, 0.4);
 }
 
 .reserve-btn:active {

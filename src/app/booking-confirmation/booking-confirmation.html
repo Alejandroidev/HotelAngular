@@ -1,0 +1,92 @@
+<div class="confirmation-container">
+  <div class="confirmation-card">
+    <div class="confirmation-header">
+      <div class="success-icon">✓</div>
+      <h1>¡Reserva Confirmada!</h1>
+      <p class="subtitle">Su reserva ha sido procesada exitosamente</p>
+    </div>
+
+    <div class="confirmation-body">
+      <!-- Información de la habitación -->
+      <section class="info-section">
+        <h2>📍 Detalles de la Habitación</h2>
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="label">Habitación:</span>
+            <span class="value">{{ bookingData.roomName }}</span>
+          </div>
+          <div class="info-item" *ngIf="bookingData.roomDescription">
+            <span class="label">Descripción:</span>
+            <span class="value">{{ bookingData.roomDescription }}</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Precio por noche:</span>
+            <span class="value">${{ bookingData.roomPrice | number:'1.2-2' }}</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Capacidad:</span>
+            <span class="value">{{ bookingData.numberOfGuests }} persona(s)</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Información de las fechas -->
+      <section class="info-section">
+        <h2>📅 Fechas de Estadía</h2>
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="label">Check-in:</span>
+            <span class="value">{{ bookingData.checkInDate | date:'fullDate':'':'es' }}</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Check-out:</span>
+            <span class="value">{{ bookingData.checkOutDate | date:'fullDate':'':'es' }}</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Número de noches:</span>
+            <span class="value highlight">{{ numberOfNights }}</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Resumen de pago -->
+      <section class="info-section payment-section">
+        <h2>💰 Resumen de Pago</h2>
+        <div class="payment-details">
+          <div class="payment-row">
+            <span>${{ bookingData.roomPrice | number:'1.2-2' }} × {{ numberOfNights }} noche(s)</span>
+            <span>${{ bookingData.roomPrice * numberOfNights | number:'1.2-2' }}</span>
+          </div>
+          <div class="payment-row total">
+            <span>Total a pagar:</span>
+            <span>${{ bookingData.totalPrice | number:'1.2-2' }}</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Estado de la reserva -->
+      <section class="info-section status-section">
+        <div class="status-badge">
+          <span class="status-icon">✓</span>
+          <span class="status-text">Estado: Confirmado</span>
+        </div>
+      </section>
+    </div>
+
+    <div class="confirmation-footer">
+      <button class="btn-secondary" (click)="printConfirmation()">
+        🖨️ Imprimir Confirmación
+      </button>
+      <button class="btn-primary" (click)="goToHome()">
+        Volver al Inicio
+      </button>
+    </div>
+
+    <div class="confirmation-note">
+      <p>
+        <strong>Nota:</strong> Se ha enviado un correo de confirmación con todos los detalles de su reserva.
+        Por favor, presente este comprobante en la recepción del hotel al momento del check-in.
+      </p>
+    </div>
+  </div>
+</div>

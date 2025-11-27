@@ -1,4 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
 
+/* Paleta de colores personalizada */
+:root {
+  --color-fondo-claro: #F7F5F2;      /* Marfil suave */
+  --color-primario: #0E3A47;         /* Azul petróleo elegante */
+  --color-secundario: #C9A86A;       /* Dorado apagado */
+  --color-acento: #E07A5F;           /* Coral suave */
+  --color-texto: #2C2C2C;            /* Gris carbón */
+}
+
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { 
+  margin: 0; 
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: var(--color-fondo-claro);
+  color: var(--color-texto);
+}

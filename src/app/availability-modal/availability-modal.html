@@ -1,0 +1,172 @@
+<div class="modal-overlay" (click)="closeModal()">
+  <div class="modal-content" (click)="stopPropagation($event)">
+    <div class="modal-header">
+      <h2>Buscar Disponibilidad</h2>
+      <p class="room-name">{{ roomName }}</p>
+      <button class="close-btn" (click)="closeModal()">✕</button>
+    </div>
+
+    <div class="modal-body">
+      <div class="date-selector">
+        <div class="form-group">
+          <label for="checkInModal">Fecha de Entrada</label>
+          <input 
+            type="date" 
+            id="checkInModal" 
+            name="checkIn"
+            [(ngModel)]="checkIn"
+            [min]="minDate"
+            (change)="onCheckInChange()"
+            required>
+        </div>
+
+        <div class="form-group">
+          <label for="checkOutModal">Fecha de Salida</label>
+          <input 
+            type="date" 
+            id="checkOutModal" 
+            name="checkOut"
+            [(ngModel)]="checkOut"
+            [min]="checkIn"
+            required>
+        </div>
+      </div>
+
+      <div class="error-message" *ngIf="errorMessage">
+        ⚠️ {{ errorMessage }}
+      </div>
+
+      <div class="result-container" *ngIf="result && !isLoading && !showClientForm">
+        <div class="success-message" *ngIf="result.isAvailable">
+          <div class="icon">✅</div>
+          <h3>¡Habitación Disponible!</h3>
+          <p>La habitación está disponible para las fechas seleccionadas.</p>
+          <div class="room-details">
+            <p><strong>Habitación:</strong> {{ result.name }}</p>
+            <p *ngIf="result.description"><strong>Descripción:</strong> {{ result.description }}</p>
+            <p><strong>Precio:</strong> ${{ result.price | number:'1.0-0' }} /noche</p>
+            <p><strong>Capacidad:</strong> {{ result.capacity }} persona(s)</p>
+            <div *ngIf="result.amenities && result.amenities.length > 0" class="amenities-list">
+              <strong>Amenidades:</strong>
+              <ul>
+                <li *ngFor="let amenity of result.amenities">{{ amenity.name }}</li>
+              </ul>
+            </div>
+          </div>
+          <button class="book-btn" (click)="showBookingForm()">Reservar Ahora</button>
+        </div>
+
+        <div class="alternative-message" *ngIf="!result.isAvailable">
+          <div class="icon">ℹ️</div>
+          <h3>Habitación No Disponible</h3>
+          <p>La habitación solicitada no está disponible, pero tenemos una alternativa del mismo tipo:</p>
+          <div class="room-details">
+            <p><strong>Habitación:</strong> {{ result.name }}</p>
+            <p *ngIf="result.description"><strong>Descripción:</strong> {{ result.description }}</p>
+            <p><strong>Precio:</strong> ${{ result.price | number:'1.0-0' }} /noche</p>
+            <p><strong>Capacidad:</strong> {{ result.capacity }} persona(s)</p>
+            <div *ngIf="result.amenities && result.amenities.length > 0" class="amenities-list">
+              <strong>Amenidades:</strong>
+              <ul>
+                <li *ngFor="let amenity of result.amenities">{{ amenity.name }}</li>
+              </ul>
+            </div>
+          </div>
+          <button class="book-btn" (click)="showBookingForm()">Reservar Alternativa</button>
+        </div>
+      </div>
+
+      <!-- Formulario de cliente -->
+      <div class="client-form-container" *ngIf="showClientForm">
+        <h3>Datos del Cliente</h3>
+        <p class="form-subtitle">Complete sus datos para continuar con la reserva</p>
+        
+        <form class="client-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="clientName">Nombre *</label>
+              <input 
+                type="text" 
+                id="clientName" 
+                name="name"
+                [(ngModel)]="client.name"
+                placeholder="Ingrese su nombre"
+                required>
+            </div>
+
+            <div class="form-group">
+              <label for="clientLastName">Apellido *</label>
+              <input 
+                type="text" 
+                id="clientLastName" 
+                name="lastName"
+                [(ngModel)]="client.lastName"
+                placeholder="Ingrese su apellido"
+                required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="clientEmail">Email *</label>
+            <input 
+              type="email" 
+              id="clientEmail" 
+              name="email"
+              [(ngModel)]="client.email"
+              placeholder="ejemplo@correo.com"
+              required>
+          </div>
+
+          <div class="form-group">
+            <label for="clientPhone">Teléfono *</label>
+            <input 
+              type="tel" 
+              id="clientPhone" 
+              name="phoneNumber"
+              [(ngModel)]="client.phoneNumber"
+              placeholder="3001234567"
+              required>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="cancel-btn" (click)="cancelClientForm()" [disabled]="isCreatingClient || isCreatingBooking">
+              Volver
+            </button>
+            <button 
+              type="button" 
+              class="submit-btn" 
+              (click)="createClientAndBook()" 
+              [disabled]="isCreatingClient || clientCreated"
+              *ngIf="!clientCreated">
+              <span *ngIf="!isCreatingClient">Guardar Datos</span>
+              <span *ngIf="isCreatingClient">Procesando...</span>
+            </button>
+            <button 
+              type="button" 
+              class="finalize-btn" 
+              (click)="finalizeBooking()" 
+              [disabled]="isCreatingBooking"
+              *ngIf="clientCreated">
+              <span *ngIf="!isCreatingBooking">✓ Finalizar Reserva</span>
+              <span *ngIf="isCreatingBooking">Finalizando...</span>
+            </button>
+          </div>
+          
+          <div class="success-notification" *ngIf="clientCreated && !isCreatingBooking">
+            <span class="check-icon">✓</span> Datos guardados correctamente. Haga clic en "Finalizar Reserva" para confirmar.
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal-footer" *ngIf="!showClientForm">
+      <button class="cancel-btn" (click)="closeModal()" [disabled]="isLoading">
+        Cancelar
+      </button>
+      <button class="search-btn" (click)="searchAvailability()" [disabled]="isLoading">
+        <span *ngIf="!isLoading">🔍 Buscar</span>
+        <span *ngIf="isLoading">Buscando...</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -31,7 +31,20 @@
         </div>
       </div>
       
-      <button class="reserve-btn">Reservar Ahora</button>
+      <div class="action-buttons">
+        <button class="availability-btn" (click)="searchAvailability(room)">
+          🔍 Buscar Disponibilidad
+        </button>
+        <button class="reserve-btn">Reservar Ahora</button>
+      </div>
     </div>
   </div>
+
+  <!-- Modal de disponibilidad -->
+  <app-availability-modal 
+    *ngIf="showModal && selectedRoom"
+    [roomId]="selectedRoom.id"
+    [roomName]="selectedRoom.description"
+    (close)="closeModal()">
+  </app-availability-modal>
 </section>

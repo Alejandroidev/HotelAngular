@@ -1,20 +1,27 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { RoomService, CheapestRoom } from '../room.service';
 import { Subscription } from 'rxjs';
+import { AvailabilityModalComponent } from '../availability-modal/availability-modal';
 
 @Component({
   selector: 'app-cheapest-rooms',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, AvailabilityModalComponent],
   templateUrl: './cheapest-rooms.html',
   styleUrls: ['./cheapest-rooms.css']
 })
 export class CheapestRoomsComponent implements OnInit, OnDestroy {
   cheapestRooms: CheapestRoom[] = [];
   private subscription: Subscription | null = null;
+  showModal: boolean = false;
+  selectedRoom: CheapestRoom | null = null;
 
-  constructor(private roomService: RoomService) { }
+  constructor(
+    private roomService: RoomService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     // Conectar al SignalR Hub
@@ -39,10 +46,23 @@ export class CheapestRoomsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // Desconectar del WebSocket cuando el componente se destruye
+    // Solo desuscribirse del observable, mantener conexión SignalR activa
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
-    this.roomService.disconnectFromCheapestByType();
+    // NO desconectar SignalR - mantener la conexión para otros componentes
+    // this.roomService.disconnectFromCheapestByType();
+    console.log('Componente de habitaciones económicas destruido - conexión SignalR se mantiene activa');
+  }
+
+  searchAvailability(room: CheapestRoom): void {
+    // Abrir modal de disponibilidad
+    this.selectedRoom = room;
+    this.showModal = true;
+  }
+
+  closeModal(): void {
+    this.showModal = false;
+    this.selectedRoom = null;
   }
 }

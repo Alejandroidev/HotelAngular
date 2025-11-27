@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { AvailableRoomsComponent } from './available-rooms/available-rooms';
 import { HomeComponent } from './home/home';
 import { RoomsComponent } from './rooms/rooms';
+import { BookingConfirmationComponent } from './booking-confirmation/booking-confirmation';
 
 export const routes: Routes = [
   {
@@ -18,5 +19,10 @@ export const routes: Routes = [
     path: 'disponibilidad',
     component: AvailableRoomsComponent,
     title: 'Habitaciones Disponibles'
+  },
+  {
+    path: 'confirmacion-reserva',
+    component: BookingConfirmationComponent,
+    title: 'Confirmación de Reserva'
   }
 ];

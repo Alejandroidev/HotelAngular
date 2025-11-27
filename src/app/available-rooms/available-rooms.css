@@ -1,6 +1,6 @@
 .available-rooms-page {
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, var(--color-primario) 0%, var(--color-secundario) 100%);
   padding: 20px;
 }
 
@@ -46,7 +46,7 @@
 
 .form-group label {
   font-weight: 600;
-  color: #333;
+  color: var(--color-texto);
   margin-bottom: 8px;
   font-size: 0.95em;
 }
@@ -61,11 +61,11 @@
 
 .form-group input:focus {
   outline: none;
-  border-color: #667eea;
+  border-color: var(--color-primario);
 }
 
 .search-btn {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, var(--color-acento) 0%, var(--color-secundario) 100%);
   color: white;
   border: none;
   padding: 12px 30px;
@@ -79,7 +79,7 @@
 
 .search-btn:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 5px 15px rgba(224, 122, 95, 0.4);
 }
 
 .search-btn:disabled {

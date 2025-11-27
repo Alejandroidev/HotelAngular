@@ -2,20 +2,45 @@
 
 .hero-section {
   text-align: center;
+  background: linear-gradient(135deg, var(--color-primario) 0%, var(--color-secundario) 100%);
+  color: white;
+  padding: 4em 2em;
+  border-radius: 8px;
+  margin-bottom: 30px;
 }
 
-.hero-section h1,
+.hero-section h1 {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 3em;
+  font-weight: 700;
+  margin-bottom: 0.5em;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
 .hero-section p {
   text-align: center;
   margin-left: auto;
   margin-right: auto;
+  font-size: 1.3em;
+  opacity: 0.95;
+  max-width: 600px;
 }
 
 .booking-form-section {
   text-align: center;
+  background-color: white;
+  padding: 2em;
+  margin-bottom: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .booking-form-section h2 {
   text-align: center;
   margin-bottom: 20px;
+  color: var(--color-primario);
+  font-size: 2em;
+  font-weight: 600;
 }
