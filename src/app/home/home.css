@@ -31,7 +31,7 @@
 .booking-form-section {
   text-align: center;
   position: relative;
-  padding: 3em 2em;
+  padding: 2.5em 2em;
   margin-bottom: 30px;
   border-radius: 12px;
   overflow: hidden;
@@ -62,9 +62,9 @@
 
 .booking-form-section h2 {
   text-align: center;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
   color: var(--color-blanco);
-  font-size: 2.2em;
+  font-size: 1.8em;
   font-weight: 700;
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
   position: relative;
@@ -75,4 +75,26 @@
 .booking-form-section > * {
   position: relative;
   z-index: 1;
+}
+
+/* ========================================
+   MODO OSCURO - PÁGINA DE INICIO
+   ======================================== */
+
+[data-theme="dark"] .booking-form-section {
+  background-image: 
+    linear-gradient(135deg, rgba(15, 20, 25, 0.75) 0%, rgba(26, 31, 46, 0.70) 100%),
+    url('https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&q=80');
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+}
+
+[data-theme="dark"] .booking-form-section::before {
+  background: radial-gradient(circle at center, transparent 0%, rgba(96, 165, 250, 0.1) 100%);
+}
+
+[data-theme="dark"] .booking-form-section h2 {
+  color: #FFFFFF;
+  text-shadow: 
+    2px 2px 8px rgba(0, 0, 0, 0.6),
+    0 0 20px rgba(96, 165, 250, 0.3);
 }

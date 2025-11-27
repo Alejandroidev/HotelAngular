@@ -1,45 +1,50 @@
-<form [formGroup]="searchForm" (ngSubmit)="onSubmit()" class="search-form-container">
-  <mat-form-field appearance="fill">
-    <mat-label>Fecha de Check-in</mat-label>
-    <input matInput [matDatepicker]="checkInPicker" formControlName="checkInDate">
-    <mat-hint>MM/DD/YYYY</mat-hint>
-    <mat-datepicker-toggle matIconSuffix [for]="checkInPicker"></mat-datepicker-toggle>
-    <mat-datepicker #checkInPicker></mat-datepicker>
-    <mat-error *ngIf="searchForm.get('checkInDate')?.hasError('required') && searchForm.get('checkInDate')?.touched">
-      La fecha de check-in es requerida.
-    </mat-error>
-    <mat-error *ngIf="searchForm.get('checkInDate')?.hasError('pastDate') && searchForm.get('checkInDate')?.touched">
-      La fecha de check-in no puede ser pasada.
-    </mat-error>
-  </mat-form-field>
+<form class="search-form" (ngSubmit)="onSubmit()">
+  <div class="form-field">
+    <label for="checkInDate">Fecha de Check-in</label>
+    <div class="input-wrapper" (click)="openDatePicker('checkInDate')">
+      <span class="input-icon">📅</span>
+      <input 
+        type="date" 
+        id="checkInDate" 
+        #checkInInput
+        [value]="checkInDateValue"
+        (change)="onCheckInChange($event)"
+        [min]="minCheckInDate"
+        required>
+    </div>
+  </div>
 
-  <mat-form-field appearance="fill">
-    <mat-label>Fecha de Check-out</mat-label>
-    <input matInput [matDatepicker]="checkOutPicker" formControlName="checkOutDate">
-    <mat-hint>MM/DD/YYYY</mat-hint>
-    <mat-datepicker-toggle matIconSuffix [for]="checkOutPicker"></mat-datepicker-toggle>
-    <mat-datepicker #checkOutPicker></mat-datepicker>
-    <mat-error *ngIf="searchForm.get('checkOutDate')?.hasError('required') && searchForm.get('checkOutDate')?.touched">
-      La fecha de check-out es requerida.
-    </mat-error>
-    <mat-error *ngIf="searchForm.hasError('dateRangeInvalid') && searchForm.get('checkOutDate')?.touched">
-      La fecha de check-out debe ser igual o posterior a la de check-in.
-    </mat-error>
-  </mat-form-field>
+  <div class="form-field">
+    <label for="checkOutDate">Fecha de Check-out</label>
+    <div class="input-wrapper" (click)="openDatePicker('checkOutDate')">
+      <span class="input-icon">📅</span>
+      <input 
+        type="date" 
+        id="checkOutDate" 
+        #checkOutInput
+        [value]="checkOutDateValue"
+        (change)="onCheckOutChange($event)"
+        [min]="minCheckOutDate"
+        required>
+    </div>
+  </div>
 
-  <mat-form-field appearance="fill">
-    <mat-label>Número de Huéspedes</mat-label>
-    <input matInput type="number" formControlName="guests" min="1">
-    <mat-icon matSuffix>people</mat-icon>
-    <mat-error *ngIf="searchForm.get('guests')?.hasError('required') && searchForm.get('guests')?.touched">
-      El número de huéspedes es requerido.
-    </mat-error>
-    <mat-error *ngIf="searchForm.get('guests')?.hasError('min') && searchForm.get('guests')?.touched">
-      Debe haber al menos 1 huésped.
-    </mat-error>
-  </mat-form-field>
+  <div class="form-field">
+    <label for="guests">Número de Huéspedes</label>
+    <div class="input-wrapper">
+      <span class="input-icon">👥</span>
+      <input 
+        type="number" 
+        id="guests" 
+        [value]="guestsValue"
+        (input)="onGuestsChange($event)"
+        min="1"
+        max="10"
+        required>
+    </div>
+  </div>
 
-  <button mat-raised-button color="accent" type="submit" [disabled]="!searchForm.valid">
+  <button type="submit" class="search-btn">
     🔍 Buscar
   </button>
 </form>

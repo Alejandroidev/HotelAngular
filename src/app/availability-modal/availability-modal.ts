@@ -23,6 +23,7 @@ export class AvailabilityModalComponent implements OnInit {
   checkIn: string = '';
   checkOut: string = '';
   minDate: string = '';
+  minCheckOutDate: string = '';
   isLoading: boolean = false;
   result: any = null;
   errorMessage: string = '';
@@ -67,15 +68,29 @@ export class AvailabilityModalComponent implements OnInit {
       const tomorrow = new Date(today);
       tomorrow.setDate(tomorrow.getDate() + 1);
       this.checkOut = tomorrow.toISOString().split('T')[0];
+      this.minCheckOutDate = this.checkOut;
+    }
+  }
+
+  openDatePicker(inputId: string): void {
+    const input = document.getElementById(inputId) as HTMLInputElement;
+    if (input) {
+      input.showPicker();
     }
   }
 
   onCheckInChange(): void {
-    // Si la fecha de salida es anterior o igual a la de entrada, ajustarla
-    if (this.checkOut && new Date(this.checkIn) >= new Date(this.checkOut)) {
-      const newCheckOut = new Date(this.checkIn);
-      newCheckOut.setDate(newCheckOut.getDate() + 1);
-      this.checkOut = newCheckOut.toISOString().split('T')[0];
+    // Actualizar fecha mínima de checkout (día siguiente al check-in)
+    if (this.checkIn) {
+      const checkInDate = new Date(this.checkIn);
+      const minCheckOut = new Date(checkInDate);
+      minCheckOut.setDate(minCheckOut.getDate() + 1);
+      this.minCheckOutDate = minCheckOut.toISOString().split('T')[0];
+      
+      // Si la fecha de salida es anterior al nuevo mínimo, ajustarla
+      if (this.checkOut && new Date(this.checkOut) <= new Date(this.checkIn)) {
+        this.checkOut = this.minCheckOutDate;
+      }
     }
   }
 

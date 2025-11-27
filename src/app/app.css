@@ -11,18 +11,19 @@ body {
 }
 
 /* ========================================
-   HEADER PRINCIPAL - DISEÑO ELEGANTE
+   HEADER PRINCIPAL - DISEÑO ELEGANTE EN NEGRO
    ======================================== */
 
 .main-header {
-  background: linear-gradient(135deg, var(--color-primario) 0%, #025a87 100%);
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
   color: white;
   padding: 0;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   position: sticky;
   top: 0;
   z-index: 1000;
   backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .header-container {
@@ -48,21 +49,95 @@ body {
   transform: translateY(-2px);
 }
 
+.logo-container {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  padding: 0.6rem 1.2rem;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all var(--transicion-rapida);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.logo-section:hover .logo-container {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.logo-content {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
 .logo-icon {
+  font-size: 2rem;
+  filter: drop-shadow(0 2px 4px rgba(3, 105, 161, 0.3));
+}
+
+.logo-text-container {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.logo-title {
+  font-family: var(--fuente-titulos);
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--color-primario);
+  letter-spacing: -0.02em;
+}
+
+.logo-subtitle {
+  font-family: var(--fuente-principal);
+  font-size: 0.8rem;
+  font-weight: 600;
   color: var(--color-secundario);
-  filter: drop-shadow(0 2px 4px rgba(202, 138, 4, 0.3));
-  transition: transform var(--transicion-rapida);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.logo-image {
+  height: 45px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  max-width: 100%;
+}
+
+.logo-fallback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primario);
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.2;
+  padding: 0.3rem 0.5rem;
+}
+
+/* Modo Oscuro - Logo */
+[data-theme="dark"] .logo-container {
+  background: linear-gradient(135deg, #ffffff 0%, #e8eaed 100%);
+  box-shadow: 0 4px 16px rgba(96, 165, 250, 0.2);
+  border: 1px solid rgba(96, 165, 250, 0.3);
+}
+
+[data-theme="dark"] .logo-section:hover .logo-container {
+  box-shadow: 0 6px 24px rgba(96, 165, 250, 0.35);
+  border-color: rgba(96, 165, 250, 0.5);
 }
 
 .logo-section:hover .logo-icon {
   transform: rotate(-5deg) scale(1.05);
 }
 
-.logo-text {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.1;
-}
+/* Navegación Principal */
 
 .logo-title {
   font-family: var(--fuente-titulos);

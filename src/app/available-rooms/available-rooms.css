@@ -1,126 +1,304 @@
 .available-rooms-page {
   min-height: 100vh;
-  background: linear-gradient(135deg, var(--color-primario) 0%, var(--color-secundario) 100%);
-  padding: 20px;
+  background-color: var(--color-fondo-claro);
+  padding: 0;
 }
 
 .page-header {
+  position: relative;
   text-align: center;
+  background: linear-gradient(135deg, rgba(3, 105, 161, 0.95) 0%, rgba(2, 90, 135, 0.98) 100%),
+              url('https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=1920&h=400&fit=crop') center/cover;
   color: white;
-  padding: 40px 20px;
-  margin-bottom: 30px;
+  padding: 80px 20px 60px;
+  margin-bottom: 50px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+.page-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, 
+    rgba(3, 105, 161, 0.85) 0%, 
+    rgba(202, 138, 4, 0.3) 100%);
+  z-index: 1;
+}
+
+.page-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, 
+    var(--color-secundario) 0%, 
+    var(--color-acento) 50%, 
+    var(--color-secundario) 100%);
+  background-size: 200% 100%;
+  z-index: 2;
+  animation: shimmerLine 4s ease-in-out infinite;
+}
+
+@keyframes shimmerLine {
+  0%, 100% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 0%;
+  }
 }
 
 .page-header h1 {
-  font-size: 2.5em;
-  margin: 0 0 10px 0;
-  font-weight: 700;
+  position: relative;
+  z-index: 2;
+  font-size: 3.5em;
+  margin: 0 0 20px 0;
+  font-weight: 800;
+  font-family: var(--fuente-titulos);
+  letter-spacing: -0.03em;
+  color: #FFFFFF;
+  text-shadow: 
+    0 2px 10px rgba(0, 0, 0, 0.5),
+    0 4px 20px rgba(202, 138, 4, 0.4),
+    0 0 30px rgba(255, 255, 255, 0.2);
+  animation: titleEntrance 1s ease-out, titleGlow 3s ease-in-out 1s infinite;
 }
 
 .page-header p {
-  font-size: 1.2em;
-  opacity: 0.9;
+  position: relative;
+  z-index: 2;
+  font-size: 1.4em;
+  opacity: 1;
   margin: 0;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.4),
+    0 4px 12px rgba(0, 0, 0, 0.3);
+  animation: subtitleEntrance 1s ease-out 0.3s backwards;
+}
+
+@keyframes titleEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px) scale(0.9);
+    filter: blur(10px);
+  }
+  60% {
+    transform: translateY(10px) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes titleGlow {
+  0%, 100% {
+    text-shadow: 
+      0 2px 10px rgba(0, 0, 0, 0.5),
+      0 4px 20px rgba(202, 138, 4, 0.4),
+      0 0 30px rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    text-shadow: 
+      0 2px 10px rgba(0, 0, 0, 0.5),
+      0 4px 25px rgba(202, 138, 4, 0.6),
+      0 0 40px rgba(255, 255, 255, 0.3),
+      0 0 50px rgba(253, 185, 19, 0.2);
+  }
+}
+
+@keyframes subtitleEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+    filter: blur(5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
 }
 
 .search-section {
-  max-width: 900px;
-  margin: 0 auto 40px;
-  background: white;
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  max-width: 1200px;
+  margin: 0 auto 60px;
+  padding: 0 20px;
 }
 
 .search-form {
+  background: white;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(3, 105, 161, 0.15);
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
   align-items: end;
+  border: 1px solid rgba(202, 138, 4, 0.2);
+  transition: all var(--transicion-media);
 }
 
-.form-group {
+.search-form:hover {
+  box-shadow: 0 15px 50px rgba(3, 105, 161, 0.2);
+  transform: translateY(-2px);
+}
+
+.form-field {
   display: flex;
   flex-direction: column;
+  gap: 10px;
 }
 
-.form-group label {
+.form-field label {
   font-weight: 600;
-  color: var(--color-texto);
-  margin-bottom: 8px;
-  font-size: 0.95em;
+  color: #1e293b;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  font-family: var(--fuente-principal);
 }
 
-.form-group input {
-  padding: 12px 15px;
-  border: 2px solid #e0e0e0;
-  border-radius: 8px;
-  font-size: 1em;
-  transition: border-color 0.3s ease;
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }
 
-.form-group input:focus {
+.input-icon {
+  position: absolute;
+  left: 14px;
+  font-size: 1.3rem;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.form-field input {
+  padding: 14px 16px 14px 48px;
+  border: 2px solid #e2e8f0;
+  border-radius: var(--radio-md);
+  font-size: 1rem;
+  font-family: var(--fuente-principal);
+  color: #1e293b;
+  background-color: #ffffff;
+  transition: all var(--transicion-rapida);
+  font-weight: 600;
+  width: 100%;
+  cursor: pointer;
+}
+
+.form-field input:hover {
+  border-color: var(--color-primario);
+  background-color: #f8fafc;
+}
+
+.form-field input:focus {
   outline: none;
   border-color: var(--color-primario);
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px var(--primario-10);
+}
+
+/* Color picker icon for date inputs */
+.form-field input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity var(--transicion-rapida);
+}
+
+.form-field input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
 }
 
 .search-btn {
-  background: linear-gradient(135deg, var(--color-acento) 0%, var(--color-secundario) 100%);
+  background: linear-gradient(135deg, var(--color-primario) 0%, var(--color-acento) 100%);
   color: white;
   border: none;
-  padding: 12px 30px;
-  border-radius: 8px;
-  font-size: 1.1em;
+  padding: 14px 35px;
+  border-radius: var(--radio-md);
+  font-size: 1.1rem;
   font-weight: 600;
+  font-family: var(--fuente-principal);
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: all var(--transicion-rapida);
   white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(3, 105, 161, 0.3);
+  letter-spacing: 0.02em;
 }
 
 .search-btn:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(224, 122, 95, 0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(3, 105, 161, 0.4);
+  background: linear-gradient(135deg, var(--color-acento) 0%, var(--color-primario) 100%);
+}
+
+.search-btn:active:not(:disabled) {
+  transform: translateY(-1px);
 }
 
 .search-btn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+  transform: none !important;
 }
 
 .error-message {
-  background-color: #fee;
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px 20px;
+}
+
+.error-message > div {
+  background: linear-gradient(135deg, #fee 0%, #fdd 100%);
   color: #c33;
-  padding: 15px;
-  border-radius: 8px;
-  margin-top: 20px;
-  border-left: 4px solid #c33;
+  padding: 20px;
+  border-radius: var(--radio-lg);
+  border-left: 5px solid #c33;
+  box-shadow: 0 4px 12px rgba(204, 51, 51, 0.2);
+  font-weight: 500;
 }
 
 .results-section {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
+  padding: 20px;
 }
 
 .results-section h2 {
   text-align: center;
-  color: white;
-  font-size: 2em;
-  margin-bottom: 20px;
+  color: var(--color-texto);
+  font-size: 2.2em;
+  margin-bottom: 30px;
+  font-family: var(--fuente-titulos);
+  font-weight: 700;
 }
 
 .results-info {
   text-align: center;
-  color: white;
+  color: var(--color-texto);
   font-size: 1.1em;
   margin-bottom: 30px;
+  font-weight: 500;
   padding: 15px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  backdrop-filter: blur(10px);
+  background: white;
+  border-radius: var(--radio-md);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .results-info strong {
-  color: #ffd700;
+  color: var(--color-primario);
+  font-weight: 700;
 }
 
 .no-results {
@@ -307,3 +485,157 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ========================================
+   MODO OSCURO - PÁGINA DE DISPONIBILIDAD
+   ======================================== */
+
+[data-theme="dark"] .available-rooms-page {
+  background-color: var(--color-fondo);
+}
+
+[data-theme="dark"] .page-header {
+  background: linear-gradient(135deg, rgba(12, 74, 110, 0.95) 0%, rgba(7, 89, 133, 0.98) 100%),
+              url('https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=1920&h=400&fit=crop') center/cover;
+}
+
+[data-theme="dark"] .page-header::before {
+  background: linear-gradient(135deg, 
+    rgba(12, 74, 110, 0.9) 0%, 
+    rgba(253, 185, 19, 0.2) 100%);
+}
+
+[data-theme="dark"] .search-form {
+  background-color: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .search-form:hover {
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] .form-field label {
+  color: #0f172a !important;
+  font-weight: 600 !important;
+}
+
+[data-theme="dark"] .form-field input {
+  background-color: #f1f5f9;
+  border-color: rgba(56, 189, 248, 0.6);
+  color: #0f172a;
+  font-weight: 600;
+  -webkit-text-fill-color: #0f172a !important;
+}
+
+[data-theme="dark"] .form-field input::placeholder {
+  color: rgba(15, 23, 42, 0.5);
+}
+
+/* Elementos específicos del date input en WebKit - MODO OSCURO */
+[data-theme="dark"] .form-field input::-webkit-datetime-edit,
+[data-theme="dark"] .form-field input::-webkit-datetime-edit-fields-wrapper,
+[data-theme="dark"] .form-field input::-webkit-datetime-edit-text,
+[data-theme="dark"] .form-field input::-webkit-datetime-edit-month-field,
+[data-theme="dark"] .form-field input::-webkit-datetime-edit-day-field,
+[data-theme="dark"] .form-field input::-webkit-datetime-edit-year-field {
+  color: #0f172a !important;
+  -webkit-text-fill-color: #0f172a !important;
+}
+
+/* Asegurar que los números también sean oscuros */
+[data-theme="dark"] .form-field input[type="number"] {
+  color: #0f172a !important;
+  -webkit-text-fill-color: #0f172a !important;
+}
+
+[data-theme="dark"] .form-field input:hover {
+  border-color: var(--color-acento);
+  background-color: #e2e8f0;
+}
+
+[data-theme="dark"] .form-field input:focus {
+  border-color: var(--color-acento);
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+}
+
+[data-theme="dark"] .form-field input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: brightness(0) saturate(100%) invert(0);
+  opacity: 0.7;
+}
+
+/* Asegurar visibilidad del icono del calendario */
+[data-theme="dark"] .form-field input::-webkit-calendar-picker-indicator {
+  filter: brightness(0) saturate(100%) invert(0);
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+[data-theme="dark"] .form-field input::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+
+/* Asegurar que el texto de fecha sea visible */
+[data-theme="dark"] .form-field input[type="date"]::-webkit-datetime-edit-text,
+[data-theme="dark"] .form-field input[type="date"]::-webkit-datetime-edit-month-field,
+[data-theme="dark"] .form-field input[type="date"]::-webkit-datetime-edit-day-field,
+[data-theme="dark"] .form-field input[type="date"]::-webkit-datetime-edit-year-field {
+  color: #FFFFFF;
+}
+
+[data-theme="dark"] .search-btn {
+  background: linear-gradient(135deg, #0c4a6e 0%, #075985 100%);
+  box-shadow: 0 4px 12px rgba(12, 74, 110, 0.5);
+}
+
+[data-theme="dark"] .search-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #075985 0%, #0369a1 100%);
+  box-shadow: 0 6px 20px rgba(12, 74, 110, 0.7);
+}
+
+[data-theme="dark"] .error-message > div {
+  background: linear-gradient(135deg, rgba(220, 38, 38, 0.2) 0%, rgba(185, 28, 28, 0.3) 100%);
+  color: #FCA5A5;
+  border-left-color: #DC2626;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+}
+
+[data-theme="dark"] .results-section h2 {
+  color: var(--color-texto);
+}
+
+[data-theme="dark"] .results-info {
+  background-color: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  color: var(--color-texto);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .results-info strong {
+  color: var(--color-acento);
+}
+
+[data-theme="dark"] .room-card {
+  background-color: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .room-card:hover {
+  background-color: var(--color-superficie-hover);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  border-color: var(--color-primario);
+}
+
+[data-theme="dark"] .reserve-btn {
+  background: linear-gradient(135deg, #60A5FA 0%, #FDB913 100%);
+  color: #0F1419;
+  box-shadow: 0 4px 12px rgba(96, 165, 250, 0.4);
+}
+
+[data-theme="dark"] .reserve-btn:hover {
+  box-shadow: 0 6px 20px rgba(96, 165, 250, 0.6);
+  background: linear-gradient(135deg, #38BDF8 0%, #FDB913 100%);
+}
+

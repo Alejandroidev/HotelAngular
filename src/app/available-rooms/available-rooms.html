@@ -6,39 +6,48 @@
 
   <section class="search-section">
     <form class="search-form" (ngSubmit)="searchAvailableRooms()">
-      <div class="form-group">
-        <label for="checkIn">Fecha de Entrada</label>
-        <input 
-          type="date" 
-          id="checkIn" 
-          name="checkIn"
-          [(ngModel)]="checkIn"
-          [min]="minDate"
-          (change)="onCheckInChange()"
-          required>
+      <div class="form-field">
+        <label for="checkIn">Fecha de Check-in</label>
+        <div class="input-wrapper" (click)="openDatePicker('checkIn')">
+          <span class="input-icon">📅</span>
+          <input 
+            type="date" 
+            id="checkIn" 
+            name="checkIn"
+            [(ngModel)]="checkIn"
+            [min]="minDate"
+            (change)="onCheckInChange()"
+            required>
+        </div>
       </div>
 
-      <div class="form-group">
-        <label for="checkOut">Fecha de Salida</label>
-        <input 
-          type="date" 
-          id="checkOut" 
-          name="checkOut"
-          [(ngModel)]="checkOut"
-          [min]="checkIn"
-          required>
+      <div class="form-field">
+        <label for="checkOut">Fecha de Check-out</label>
+        <div class="input-wrapper" (click)="openDatePicker('checkOut')">
+          <span class="input-icon">📅</span>
+          <input 
+            type="date" 
+            id="checkOut" 
+            name="checkOut"
+            [(ngModel)]="checkOut"
+            [min]="minCheckOutDate"
+            required>
+        </div>
       </div>
 
-      <div class="form-group">
+      <div class="form-field">
         <label for="guests">Número de Huéspedes</label>
-        <input 
-          type="number" 
-          id="guests" 
-          name="guests"
-          [(ngModel)]="guests"
-          min="1"
-          max="10"
-          required>
+        <div class="input-wrapper">
+          <span class="input-icon">👥</span>
+          <input 
+            type="number" 
+            id="guests" 
+            name="guests"
+            [(ngModel)]="guests"
+            min="1"
+            max="10"
+            required>
+        </div>
       </div>
 
       <button type="submit" class="search-btn" [disabled]="isLoading">

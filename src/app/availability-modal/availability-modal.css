@@ -105,17 +105,54 @@
   font-size: 0.95em;
 }
 
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.input-icon {
+  position: absolute;
+  left: 12px;
+  font-size: 1.2rem;
+  pointer-events: none;
+  z-index: 1;
+}
+
 .form-group input {
-  padding: 12px 15px;
+  padding: 12px 15px 12px 42px;
   border: 2px solid #e0e0e0;
   border-radius: 8px;
   font-size: 1em;
-  transition: border-color 0.3s ease;
+  font-weight: 600;
+  width: 100%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: var(--color-texto);
+}
+
+.form-group input:hover {
+  border-color: var(--color-primario);
+  background-color: #f8fafc;
 }
 
 .form-group input:focus {
   outline: none;
   border-color: var(--color-primario);
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(3, 105, 161, 0.1);
+}
+
+.form-group input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.form-group input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
 }
 
 .error-message {
@@ -460,4 +497,47 @@
   .form-row {
     grid-template-columns: 1fr;
   }
+}
+
+/* Dark mode styles */
+:host-context(.dark-mode) .modal-content {
+  background: #1a1f2e;
+  color: #f1f5f9;
+}
+
+:host-context(.dark-mode) .modal-header {
+  border-bottom: 2px solid rgba(96, 165, 250, 0.3);
+}
+
+:host-context(.dark-mode) .close-btn {
+  color: #f1f5f9;
+}
+
+:host-context(.dark-mode) .close-btn:hover {
+  background: rgba(96, 165, 250, 0.2);
+}
+
+:host-context(.dark-mode) .form-group label {
+  color: #f1f5f9;
+}
+
+:host-context(.dark-mode) .form-group input {
+  background-color: rgba(30, 41, 59, 0.5);
+  border-color: rgba(96, 165, 250, 0.3);
+  color: #f1f5f9;
+}
+
+:host-context(.dark-mode) .form-group input:hover {
+  background-color: rgba(30, 41, 59, 0.7);
+  border-color: var(--color-primario);
+}
+
+:host-context(.dark-mode) .form-group input:focus {
+  background-color: rgba(30, 41, 59, 0.8);
+  border-color: var(--color-primario);
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2);
+}
+
+:host-context(.dark-mode) .form-group input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.8);
 }

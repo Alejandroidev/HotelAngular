@@ -1,51 +1,159 @@
 .rooms-page {
   min-height: 100vh;
-  background: linear-gradient(135deg, var(--color-primario) 0%, var(--color-secundario) 100%);
-  padding: 20px;
+  background-color: var(--color-fondo-claro);
+  padding: 0;
 }
 
 .page-header {
+  position: relative;
   text-align: center;
+  background: linear-gradient(135deg, rgba(3, 105, 161, 0.95) 0%, rgba(2, 90, 135, 0.98) 100%),
+              url('https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=1920&h=400&fit=crop') center/cover;
   color: white;
-  padding: 40px 20px;
-  margin-bottom: 30px;
+  padding: 80px 20px 60px;
+  margin-bottom: 50px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+.page-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, 
+    rgba(3, 105, 161, 0.85) 0%, 
+    rgba(202, 138, 4, 0.3) 100%);
+  z-index: 1;
+}
+
+.page-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, 
+    var(--color-secundario) 0%, 
+    var(--color-acento) 50%, 
+    var(--color-secundario) 100%);
+  background-size: 200% 100%;
+  z-index: 2;
+  animation: shimmerLine 4s ease-in-out infinite;
+}
+
+@keyframes shimmerLine {
+  0%, 100% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 0%;
+  }
 }
 
 .page-header h1 {
-  font-size: 2.5em;
-  margin: 0 0 10px 0;
-  font-weight: 700;
+  position: relative;
+  z-index: 2;
+  font-size: 3.5em;
+  margin: 0 0 20px 0;
+  font-weight: 800;
+  font-family: var(--fuente-titulos);
+  letter-spacing: -0.03em;
+  color: #FFFFFF;
+  text-shadow: 
+    0 2px 10px rgba(0, 0, 0, 0.5),
+    0 4px 20px rgba(202, 138, 4, 0.4),
+    0 0 30px rgba(255, 255, 255, 0.2);
+  animation: titleEntrance 1s ease-out, titleGlow 3s ease-in-out 1s infinite;
 }
 
 .page-header p {
-  font-size: 1.2em;
-  opacity: 0.9;
+  position: relative;
+  z-index: 2;
+  font-size: 1.4em;
+  opacity: 1;
   margin: 0;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.4),
+    0 4px 12px rgba(0, 0, 0, 0.3);
+  animation: subtitleEntrance 1s ease-out 0.3s backwards;
+}
+
+@keyframes titleEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px) scale(0.9);
+    filter: blur(10px);
+  }
+  60% {
+    transform: translateY(10px) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes titleGlow {
+  0%, 100% {
+    text-shadow: 
+      0 2px 10px rgba(0, 0, 0, 0.5),
+      0 4px 20px rgba(202, 138, 4, 0.4),
+      0 0 30px rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    text-shadow: 
+      0 2px 10px rgba(0, 0, 0, 0.5),
+      0 4px 25px rgba(202, 138, 4, 0.6),
+      0 0 40px rgba(255, 255, 255, 0.3),
+      0 0 50px rgba(253, 185, 19, 0.2);
+  }
+}
+
+@keyframes subtitleEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+    filter: blur(5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
 }
 
 .rooms-section {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
+  padding: 20px;
 }
 
 .loading-message {
   text-align: center;
-  color: white;
+  color: var(--color-texto);
   font-size: 1.5em;
   padding: 60px 20px;
-  background: rgba(255, 255, 255, 0.1);
+  background: white;
   border-radius: 15px;
-  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .empty-message {
   text-align: center;
-  color: white;
+  color: var(--color-texto);
   font-size: 1.3em;
   padding: 60px 20px;
-  background: rgba(255, 255, 255, 0.1);
+  background: white;
   border-radius: 15px;
-  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .rooms-grid {
@@ -459,10 +567,42 @@
 
 @media (max-width: 768px) {
   .page-header h1 {
-    font-size: 2em;
+    font-size: 2.2em;
+  }
+  
+  .page-header p {
+    font-size: 1.1em;
+  }
+  
+  .page-header {
+    padding: 60px 20px 50px;
   }
   
   .rooms-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* Responsive para tablet */
+@media (max-width: 1024px) {
+  .page-header h1 {
+    font-size: 3em;
+  }
+}
+
+/* Modo oscuro específico para header de habitaciones */
+[data-theme="dark"] .page-header {
+  background: linear-gradient(135deg, rgba(15, 20, 25, 0.95) 0%, rgba(26, 31, 46, 0.98) 100%),
+              url('https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=1920&h=400&fit=crop') center/cover;
+}
+
+[data-theme="dark"] .page-header::before {
+  background: linear-gradient(135deg, 
+    rgba(96, 165, 250, 0.3) 0%, 
+    rgba(253, 185, 19, 0.2) 100%);
+}
+
+[data-theme="dark"] .page-header h1,
+[data-theme="dark"] .page-header p {
+  text-shadow: 0 4px 16px rgba(0, 0, 0, 0.8);
 }

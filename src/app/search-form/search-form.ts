@@ -1,68 +1,88 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common'; 
-import { FormsModule, ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-
-// Módulos de Angular Material
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input'; 
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-search-form',
   standalone: true,
   imports: [
     CommonModule,
-    FormsModule, 
-    ReactiveFormsModule, 
-    MatFormFieldModule,
-    MatInputModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatButtonModule,
-    MatIconModule
+    FormsModule
   ],
   templateUrl: './search-form.html',
   styleUrls: ['./search-form.css'],
 })
 export class SearchForm {
-  searchForm = new FormGroup({
-    checkInDate: new FormControl<Date | null>(null),
-    checkOutDate: new FormControl<Date | null>(null),
-    guests: new FormControl(1), 
-  });
+  @ViewChild('checkInInput') checkInInput!: ElementRef<HTMLInputElement>;
+  @ViewChild('checkOutInput') checkOutInput!: ElementRef<HTMLInputElement>;
 
-  constructor(private router: Router) {}
+  checkInDateValue: string;
+  checkOutDateValue: string;
+  guestsValue: number = 1;
+  
+  minCheckInDate: string;
+  minCheckOutDate: string;
 
-  onSubmit() {
-    if (this.searchForm.valid) {
-      const checkIn = this.searchForm.value.checkInDate;
-      const checkOut = this.searchForm.value.checkOutDate;
-      const guests = this.searchForm.value.guests || 1;
+  constructor(private router: Router) {
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    
+    this.minCheckInDate = this.formatDateForInput(today);
+    this.checkInDateValue = this.formatDateForInput(today);
+    
+    this.minCheckOutDate = this.formatDateForInput(tomorrow);
+    this.checkOutDateValue = this.formatDateForInput(tomorrow);
+  }
 
-      if (checkIn && checkOut) {
-        // Formatear fechas a yyyy-MM-dd
-        const checkInStr = this.formatDate(checkIn);
-        const checkOutStr = this.formatDate(checkOut);
-
-        // Navegar a la página de disponibilidad con parámetros
-        this.router.navigate(['/disponibilidad'], {
-          queryParams: {
-            checkIn: checkInStr,
-            checkOut: checkOutStr,
-            guests: guests
-          }
-        });
-      } else {
-        console.warn('Por favor seleccione fechas de entrada y salida');
-      }
+  onCheckInChange(event: Event) {
+    const input = event.target as HTMLInputElement;
+    this.checkInDateValue = input.value;
+    
+    // Actualizar fecha mínima de checkout
+    const checkInDate = new Date(input.value);
+    const minCheckOut = new Date(checkInDate);
+    minCheckOut.setDate(minCheckOut.getDate() + 1);
+    this.minCheckOutDate = this.formatDateForInput(minCheckOut);
+    
+    // Si checkout es antes del nuevo mínimo, ajustarlo
+    if (this.checkOutDateValue < this.minCheckOutDate) {
+      this.checkOutDateValue = this.minCheckOutDate;
     }
   }
 
-  private formatDate(date: Date): string {
+  onCheckOutChange(event: Event) {
+    const input = event.target as HTMLInputElement;
+    this.checkOutDateValue = input.value;
+  }
+
+  onGuestsChange(event: Event) {
+    const input = event.target as HTMLInputElement;
+    this.guestsValue = parseInt(input.value, 10);
+  }
+
+  openDatePicker(inputId: string) {
+    if (inputId === 'checkInDate' && this.checkInInput) {
+      this.checkInInput.nativeElement.showPicker();
+    } else if (inputId === 'checkOutDate' && this.checkOutInput) {
+      this.checkOutInput.nativeElement.showPicker();
+    }
+  }
+
+  onSubmit() {
+    if (this.checkInDateValue && this.checkOutDateValue && this.guestsValue) {
+      this.router.navigate(['/disponibilidad'], {
+        queryParams: {
+          checkIn: this.checkInDateValue,
+          checkOut: this.checkOutDateValue,
+          guests: this.guestsValue
+        }
+      });
+    }
+  }
+
+  private formatDateForInput(date: Date): string {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');

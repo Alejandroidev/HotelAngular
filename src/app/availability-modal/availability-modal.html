@@ -10,25 +10,31 @@
       <div class="date-selector">
         <div class="form-group">
           <label for="checkInModal">Fecha de Entrada</label>
-          <input 
-            type="date" 
-            id="checkInModal" 
-            name="checkIn"
-            [(ngModel)]="checkIn"
-            [min]="minDate"
-            (change)="onCheckInChange()"
-            required>
+          <div class="input-wrapper" (click)="openDatePicker('checkInModal')">
+            <span class="input-icon">📅</span>
+            <input 
+              type="date" 
+              id="checkInModal" 
+              name="checkIn"
+              [(ngModel)]="checkIn"
+              [min]="minDate"
+              (change)="onCheckInChange()"
+              required>
+          </div>
         </div>
 
         <div class="form-group">
           <label for="checkOutModal">Fecha de Salida</label>
-          <input 
-            type="date" 
-            id="checkOutModal" 
-            name="checkOut"
-            [(ngModel)]="checkOut"
-            [min]="checkIn"
-            required>
+          <div class="input-wrapper" (click)="openDatePicker('checkOutModal')">
+            <span class="input-icon">📅</span>
+            <input 
+              type="date" 
+              id="checkOutModal" 
+              name="checkOut"
+              [(ngModel)]="checkOut"
+              [min]="minCheckOutDate"
+              required>
+          </div>
         </div>
       </div>
 

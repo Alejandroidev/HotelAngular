@@ -154,52 +154,58 @@ button {
 }
 
 /* ========================================
-   MODO OSCURO
+   MODO OSCURO - ELEGANCIA NOCTURNA
    ======================================== */
 
 [data-theme="dark"] {
-  /* --- Colores Base - MODO OSCURO --- */
-  --color-fondo-claro: #1E272E;      /* Azul gris oscuro - Fondo principal */
-  --color-primario: #4A90E2;         /* Azul claro - Color principal invertido */
-  --color-secundario: #F4C430;       /* Dorado brillante - Acentos de lujo */
-  --color-acento: #5DADE2;           /* Azul cielo - Call-to-action */
-  --color-texto: #E8E9EB;            /* Gris muy claro - Texto principal */
+  /* --- Colores Base - MODO OSCURO ELEGANTE --- */
+  --color-fondo-claro: #0F1419;      /* Negro azulado profundo - Elegante y sofisticado */
+  --color-primario: #60A5FA;         /* Azul luminoso - Mantiene la identidad pero más vibrante */
+  --color-secundario: #FDB913;       /* Oro imperial - Lujo y calidez */
+  --color-acento: #38BDF8;           /* Azul cielo brillante - Call-to-action destacado */
+  --color-texto: #F1F5F9;            /* Blanco suave - Excelente legibilidad */
   
   /* --- Colores Complementarios --- */
-  --color-blanco: #FFFFFF;           /* Blanco siempre blanco */
-  --color-negro: #1E272E;            /* Negro es el fondo oscuro */
-  --color-texto-sobre-oscuro: #FFFFFF; /* Texto blanco para fondos oscuros */
-  --color-texto-claro: #B8B9BB;      /* Texto secundario */
-  --color-borde: #404854;            /* Bordes y líneas */
+  --color-blanco: #FFFFFF;           
+  --color-negro: #0F1419;            
+  --color-texto-sobre-oscuro: #FFFFFF; 
+  --color-texto-claro: #CBD5E1;      /* Gris azulado claro - Texto secundario elegante */
+  --color-borde: #1E293B;            /* Bordes sutiles pero definidos */
+  
+  /* --- Tonos de Superficie (para tarjetas y elementos elevados) --- */
+  --color-superficie: #1A1F2E;       /* Superficie elevada - Contraste sutil */
+  --color-superficie-hover: #242B3D; /* Superficie al hover - Más claro */
   
   /* --- Gradientes --- */
-  --gradiente-primario: linear-gradient(135deg, var(--color-primario) 0%, var(--color-secundario) 100%);
-  --gradiente-acento: linear-gradient(135deg, var(--color-acento) 0%, var(--color-secundario) 100%);
-  --gradiente-suave: linear-gradient(135deg, #2C3E50 0%, #34495E 100%);
+  --gradiente-primario: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);
+  --gradiente-secundario: linear-gradient(135deg, #FDB913 0%, #D97706 100%);
+  --gradiente-acento: linear-gradient(135deg, #38BDF8 0%, #0EA5E9 100%);
+  --gradiente-suave: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
+  --gradiente-fondo: linear-gradient(180deg, #0F1419 0%, #1A1F2E 100%);
   
-  /* --- Sombras --- */
-  --sombra-suave: 0 2px 5px rgba(0, 0, 0, 0.3);
-  --sombra-media: 0 4px 12px rgba(0, 0, 0, 0.4);
-  --sombra-fuerte: 0 8px 20px rgba(0, 0, 0, 0.5);
-  --sombra-primario: 0 5px 15px rgba(74, 144, 226, 0.3);
-  --sombra-acento: 0 5px 15px rgba(93, 173, 226, 0.3);
-  --sombra-secundario: 0 3px 8px rgba(244, 196, 48, 0.3);
+  /* --- Sombras con resplandor --- */
+  --sombra-suave: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --sombra-media: 0 4px 16px rgba(0, 0, 0, 0.5);
+  --sombra-fuerte: 0 8px 24px rgba(0, 0, 0, 0.6);
+  --sombra-primario: 0 4px 20px rgba(96, 165, 250, 0.3);
+  --sombra-acento: 0 4px 20px rgba(56, 189, 248, 0.3);
+  --sombra-secundario: 0 4px 20px rgba(253, 185, 19, 0.4);
   
   /* --- Opacidades de Colores --- */
-  --primario-10: rgba(74, 144, 226, 0.1);
-  --primario-20: rgba(74, 144, 226, 0.2);
-  --primario-30: rgba(74, 144, 226, 0.3);
-  --primario-40: rgba(74, 144, 226, 0.4);
+  --primario-10: rgba(96, 165, 250, 0.1);
+  --primario-20: rgba(96, 165, 250, 0.2);
+  --primario-30: rgba(96, 165, 250, 0.3);
+  --primario-40: rgba(96, 165, 250, 0.4);
   
-  --secundario-10: rgba(244, 196, 48, 0.1);
-  --secundario-20: rgba(244, 196, 48, 0.2);
-  --secundario-30: rgba(244, 196, 48, 0.3);
-  --secundario-40: rgba(244, 196, 48, 0.4);
+  --secundario-10: rgba(253, 185, 19, 0.1);
+  --secundario-20: rgba(253, 185, 19, 0.2);
+  --secundario-30: rgba(253, 185, 19, 0.3);
+  --secundario-40: rgba(253, 185, 19, 0.4);
   
-  --acento-10: rgba(93, 173, 226, 0.1);
-  --acento-20: rgba(93, 173, 226, 0.2);
-  --acento-30: rgba(93, 173, 226, 0.3);
-  --acento-40: rgba(93, 173, 226, 0.4);
+  --acento-10: rgba(56, 189, 248, 0.1);
+  --acento-20: rgba(56, 189, 248, 0.2);
+  --acento-30: rgba(56, 189, 248, 0.3);
+  --acento-40: rgba(56, 189, 248, 0.4);
 }
 
 html, body { height: 100%; }
@@ -269,8 +275,285 @@ body {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
+/* ========================================
+   MEJORAS ESPECÍFICAS MODO OSCURO
+   ======================================== */
+
+[data-theme="dark"] {
+  /* Fondo con gradiente sutil */
+  background: var(--gradiente-fondo);
+}
+
+[data-theme="dark"] .room-card,
+[data-theme="dark"] .booking-form-section,
+[data-theme="dark"] .about-section,
+[data-theme="dark"] .search-section,
+[data-theme="dark"] .modal-content {
+  background-color: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  box-shadow: var(--sombra-media);
+}
+
+[data-theme="dark"] .room-card:hover {
+  background-color: var(--color-superficie-hover);
+  box-shadow: var(--sombra-primario);
+  border-color: var(--primario-30);
+}
+
+[data-theme="dark"] .price-tag,
+[data-theme="dark"] .search-btn,
+[data-theme="dark"] .reserve-btn,
+[data-theme="dark"] .availability-btn {
+  box-shadow: var(--sombra-primario);
+}
+
+[data-theme="dark"] .price-tag:hover,
+[data-theme="dark"] .search-btn:hover,
+[data-theme="dark"] .reserve-btn:hover,
+[data-theme="dark"] .availability-btn:hover {
+  box-shadow: var(--sombra-secundario);
+}
+
+[data-theme="dark"] input,
+[data-theme="dark"] select,
+[data-theme="dark"] textarea {
+  background-color: var(--color-superficie);
+  border-color: var(--color-borde);
+  color: var(--color-texto);
+}
+
+[data-theme="dark"] input:focus,
+[data-theme="dark"] select:focus,
+[data-theme="dark"] textarea:focus {
+  border-color: var(--color-primario);
+  box-shadow: 0 0 0 3px var(--primario-20);
+}
+
+[data-theme="dark"] .room-info {
+  background-color: rgba(26, 31, 46, 0.6);
+  border: 1px solid var(--color-borde);
+}
+
+/* Badges con resplandor en modo oscuro */
+[data-theme="dark"] .featured-badge,
+[data-theme="dark"] .badge-mejor-precio,
+[data-theme="dark"] .badge-recomendado,
+[data-theme="dark"] .badge-premium {
+  text-shadow: 0 0 10px currentColor;
+  box-shadow: 0 0 15px currentColor;
+}
+
+/* Header ya es negro en ambos temas, no necesita override */
+
+[data-theme="dark"] .main-footer {
+  background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+  border-top: 1px solid var(--color-borde);
+}
+
 .theme-toggle:active {
   transform: scale(0.95);
+}
+
+/* ========================================
+   PERSONALIZACIÓN DEL CALENDARIO (DATEPICKER)
+   ======================================== */
+
+/* Contenedor principal del calendario */
+.mat-datepicker-content {
+  background-color: var(--color-blanco) !important;
+  border-radius: var(--radio-lg) !important;
+  box-shadow: 0 10px 40px rgba(3, 105, 161, 0.2) !important;
+  border: 1px solid var(--color-borde) !important;
+  overflow: hidden !important;
+}
+
+/* Header del calendario (mes y año) */
+.mat-calendar-header {
+  background: var(--gradiente-primario) !important;
+  color: white !important;
+  padding: 1.5rem 1rem !important;
+  border-radius: 0 !important;
+}
+
+.mat-calendar-controls {
+  margin: 0 !important;
+}
+
+/* Botones de navegación (flechas) */
+.mat-calendar-previous-button,
+.mat-calendar-next-button {
+  color: white !important;
+  width: 40px !important;
+  height: 40px !important;
+  transition: all var(--transicion-rapida) !important;
+}
+
+.mat-calendar-previous-button:hover,
+.mat-calendar-next-button:hover {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  transform: scale(1.1) !important;
+}
+
+/* Botón del período (mes/año) */
+.mat-calendar-period-button {
+  color: white !important;
+  font-family: var(--fuente-titulos) !important;
+  font-size: 1.2rem !important;
+  font-weight: var(--peso-bold) !important;
+  letter-spacing: 0.5px !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: var(--radio-md) !important;
+  transition: all var(--transicion-rapida) !important;
+}
+
+.mat-calendar-period-button:hover {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* Flecha del botón de período */
+.mat-calendar-arrow {
+  border-top-color: white !important;
+}
+
+/* Cuerpo del calendario */
+.mat-calendar-content {
+  padding: 1rem !important;
+  font-family: var(--fuente-principal) !important;
+}
+
+/* Días de la semana (Dom, Lun, etc.) */
+.mat-calendar-table-header th {
+  color: var(--color-primario) !important;
+  font-weight: var(--peso-bold) !important;
+  font-size: 0.85rem !important;
+  padding: 0.5rem 0 !important;
+  letter-spacing: 0.5px !important;
+  text-transform: uppercase !important;
+}
+
+/* Celdas de días */
+.mat-calendar-body-cell {
+  border-radius: var(--radio-md) !important;
+  transition: all var(--transicion-rapida) !important;
+}
+
+/* Contenido de cada celda de día */
+.mat-calendar-body-cell-content {
+  color: var(--color-texto) !important;
+  font-weight: var(--peso-medio) !important;
+  border-radius: var(--radio-md) !important;
+  width: 36px !important;
+  height: 36px !important;
+  line-height: 36px !important;
+  transition: all var(--transicion-rapida) !important;
+}
+
+/* Hover sobre días */
+.mat-calendar-body-cell:not(.mat-calendar-body-disabled):hover .mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical) {
+  background-color: var(--primario-10) !important;
+  color: var(--color-primario) !important;
+  transform: scale(1.1) !important;
+}
+
+/* Día seleccionado */
+.mat-calendar-body-selected {
+  background: var(--gradiente-primario) !important;
+  color: white !important;
+  font-weight: var(--peso-bold) !important;
+  box-shadow: 0 4px 12px rgba(3, 105, 161, 0.4) !important;
+  transform: scale(1.05) !important;
+}
+
+/* Día de hoy (indicador) */
+.mat-calendar-body-today:not(.mat-calendar-body-selected) {
+  border: 2px solid var(--color-acento) !important;
+  color: var(--color-acento) !important;
+  font-weight: var(--peso-bold) !important;
+}
+
+.mat-calendar-body-today:not(.mat-calendar-body-selected):hover .mat-calendar-body-cell-content {
+  background-color: var(--acento-20) !important;
+  color: var(--color-acento) !important;
+}
+
+/* Días deshabilitados (del pasado) */
+.mat-calendar-body-disabled {
+  opacity: 0.3 !important;
+  cursor: not-allowed !important;
+}
+
+.mat-calendar-body-disabled .mat-calendar-body-cell-content {
+  color: var(--color-texto-claro) !important;
+}
+
+/* Rango de fechas (entre check-in y check-out) */
+.mat-calendar-body-in-range::before {
+  background-color: var(--primario-10) !important;
+}
+
+.mat-calendar-body-range-start,
+.mat-calendar-body-range-end {
+  background-color: var(--color-primario) !important;
+}
+
+/* Botones de acción (Cancelar, Aceptar) - si los hay */
+.mat-datepicker-actions {
+  padding: 0.5rem 1rem 1rem !important;
+  display: flex !important;
+  justify-content: flex-end !important;
+  gap: 0.5rem !important;
+}
+
+.mat-datepicker-actions button {
+  font-family: var(--fuente-principal) !important;
+  font-weight: var(--peso-semibold) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  padding: 0.5rem 1.5rem !important;
+  border-radius: var(--radio-md) !important;
+  transition: all var(--transicion-rapida) !important;
+}
+
+/* ========================================
+   CALENDARIO - MODO OSCURO
+   ======================================== */
+
+[data-theme="dark"] .mat-datepicker-content {
+  background-color: var(--color-superficie) !important;
+  border: 1px solid var(--color-borde) !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5) !important;
+}
+
+[data-theme="dark"] .mat-calendar-header {
+  background: linear-gradient(135deg, #0c4a6e 0%, #075985 100%) !important;
+}
+
+[data-theme="dark"] .mat-calendar-table-header th {
+  color: var(--color-acento) !important;
+}
+
+[data-theme="dark"] .mat-calendar-body-cell-content {
+  color: var(--color-texto) !important;
+}
+
+[data-theme="dark"] .mat-calendar-body-cell:not(.mat-calendar-body-disabled):hover .mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical) {
+  background-color: rgba(56, 189, 248, 0.15) !important;
+  color: var(--color-acento) !important;
+}
+
+[data-theme="dark"] .mat-calendar-body-selected {
+  background: linear-gradient(135deg, #60A5FA 0%, #38BDF8 100%) !important;
+  color: #0F1419 !important;
+  font-weight: var(--peso-bold) !important;
+}
+
+[data-theme="dark"] .mat-calendar-body-today:not(.mat-calendar-body-selected) {
+  border-color: var(--color-acento) !important;
+  color: var(--color-acento) !important;
+}
+
+[data-theme="dark"] .mat-calendar-body-disabled .mat-calendar-body-cell-content {
+  color: rgba(241, 245, 249, 0.3) !important;
 }
 
 

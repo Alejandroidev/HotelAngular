@@ -121,7 +121,7 @@ export class BookingService {
       checkOutDate: this.formatDateForBackend(booking.checkOutDate),
       numberOfGuests: booking.numberOfGuests || 1,
       totalPrice: booking.totalPrice || 0,
-      status: 'Confirmado'
+      status: 'Confirmed'
     };
     
     return dto;
