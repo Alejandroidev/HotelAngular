@@ -1,18 +1,276 @@
 /* You can add global styles to this file, and also import other style files */
 
-/* Paleta de colores personalizada */
+/* ========================================
+   PALETA DE COLORES - HOTEL U COLOMBIA
+   ======================================== */
+
 :root {
-  --color-fondo-claro: #F7F5F2;      /* Marfil suave */
-  --color-primario: #0E3A47;         /* Azul petróleo elegante */
-  --color-secundario: #C9A86A;       /* Dorado apagado */
-  --color-acento: #E07A5F;           /* Coral suave */
-  --color-texto: #2C2C2C;            /* Gris carbón */
+  /* --- Colores Base - MODO CLARO --- */
+  --color-fondo-claro: #FFFEF9;      /* Blanco marfil - Fondo principal elegante */
+  --color-primario: #0369A1;         /* Azul mediterráneo - Color principal del hotel */
+  --color-secundario: #CA8A04;       /* Dorado antiguo - Acentos de lujo */
+  --color-acento: #06B6D4;           /* Turquesa - Call-to-action */
+  --color-texto: #1E293B;            /* Azul gris oscuro - Texto principal */
+  
+  /* --- Colores Complementarios --- */
+  --color-blanco: #FFFFFF;
+  --color-negro: #0F172A;
+  --color-texto-sobre-oscuro: #FFFFFF; /* Texto blanco para fondos oscuros */
+  --color-texto-claro: #475569;      /* Texto secundario */
+  --color-borde: #E2E8F0;            /* Bordes y líneas */
+  
+  /* --- Gradientes --- */
+  --gradiente-primario: linear-gradient(135deg, var(--color-primario) 0%, var(--color-secundario) 100%);
+  --gradiente-acento: linear-gradient(135deg, var(--color-acento) 0%, var(--color-secundario) 100%);
+  --gradiente-suave: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  
+  /* --- Sombras --- */
+  --sombra-suave: 0 2px 5px rgba(3, 105, 161, 0.08);
+  --sombra-media: 0 4px 12px rgba(3, 105, 161, 0.12);
+  --sombra-fuerte: 0 8px 20px rgba(3, 105, 161, 0.16);
+  --sombra-primario: 0 5px 15px rgba(3, 105, 161, 0.3);
+  --sombra-acento: 0 5px 15px rgba(6, 182, 212, 0.3);
+  --sombra-secundario: 0 3px 8px rgba(202, 138, 4, 0.3);
+  
+  /* --- Opacidades de Colores (para overlays y borders) --- */
+  --primario-10: rgba(3, 105, 161, 0.1);
+  --primario-20: rgba(3, 105, 161, 0.2);
+  --primario-30: rgba(3, 105, 161, 0.3);
+  --primario-40: rgba(3, 105, 161, 0.4);
+  
+  --secundario-10: rgba(202, 138, 4, 0.1);
+  --secundario-20: rgba(202, 138, 4, 0.2);
+  --secundario-30: rgba(202, 138, 4, 0.3);
+  --secundario-40: rgba(202, 138, 4, 0.4);
+  
+  --acento-10: rgba(6, 182, 212, 0.1);
+  --acento-20: rgba(6, 182, 212, 0.2);
+  --acento-30: rgba(6, 182, 212, 0.3);
+  --acento-40: rgba(6, 182, 212, 0.4);
+  
+  /* --- Espaciado --- */
+  --espacio-xs: 8px;
+  --espacio-sm: 12px;
+  --espacio-md: 20px;
+  --espacio-lg: 30px;
+  --espacio-xl: 40px;
+  
+  /* --- Bordes Redondeados --- */
+  --radio-sm: 6px;
+  --radio-md: 8px;
+  --radio-lg: 12px;
+  --radio-xl: 15px;
+  --radio-pill: 25px;
+  
+  /* --- Transiciones --- */
+  --transicion-rapida: 0.2s ease;
+  --transicion-media: 0.3s ease;
+  --transicion-lenta: 0.5s ease;
+  
+  /* --- Tipografía --- */
+  --fuente-principal: 'Montserrat', sans-serif;
+  --fuente-titulos: 'Playfair Display', serif;
+  --peso-light: 300;
+  --peso-normal: 400;
+  --peso-medio: 500;
+  --peso-semibold: 600;
+  --peso-bold: 700;
+  --peso-extrabold: 800;
+}
+
+/* ========================================
+   ESTILOS GLOBALES DE TIPOGRAFÍA
+   ======================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--fuente-principal);
+  font-weight: var(--peso-normal);
+  color: var(--color-texto);
+  background-color: var(--color-fondo-claro);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--fuente-titulos);
+  font-weight: var(--peso-bold);
+  line-height: 1.2;
+  color: var(--color-primario);
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: 3rem;
+  font-weight: var(--peso-extrabold);
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: 2.5rem;
+  font-weight: var(--peso-bold);
+}
+
+h3 {
+  font-size: 2rem;
+  font-weight: var(--peso-semibold);
+}
+
+h4 {
+  font-size: 1.5rem;
+}
+
+h5 {
+  font-size: 1.25rem;
+}
+
+h6 {
+  font-size: 1rem;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+a {
+  color: var(--color-primario);
+  text-decoration: none;
+  transition: color var(--transicion-rapida);
+}
+
+a:hover {
+  color: var(--color-acento);
+}
+
+button {
+  font-family: var(--fuente-principal);
+  font-weight: var(--peso-semibold);
+}
+
+/* ========================================
+   MODO OSCURO
+   ======================================== */
+
+[data-theme="dark"] {
+  /* --- Colores Base - MODO OSCURO --- */
+  --color-fondo-claro: #1E272E;      /* Azul gris oscuro - Fondo principal */
+  --color-primario: #4A90E2;         /* Azul claro - Color principal invertido */
+  --color-secundario: #F4C430;       /* Dorado brillante - Acentos de lujo */
+  --color-acento: #5DADE2;           /* Azul cielo - Call-to-action */
+  --color-texto: #E8E9EB;            /* Gris muy claro - Texto principal */
+  
+  /* --- Colores Complementarios --- */
+  --color-blanco: #FFFFFF;           /* Blanco siempre blanco */
+  --color-negro: #1E272E;            /* Negro es el fondo oscuro */
+  --color-texto-sobre-oscuro: #FFFFFF; /* Texto blanco para fondos oscuros */
+  --color-texto-claro: #B8B9BB;      /* Texto secundario */
+  --color-borde: #404854;            /* Bordes y líneas */
+  
+  /* --- Gradientes --- */
+  --gradiente-primario: linear-gradient(135deg, var(--color-primario) 0%, var(--color-secundario) 100%);
+  --gradiente-acento: linear-gradient(135deg, var(--color-acento) 0%, var(--color-secundario) 100%);
+  --gradiente-suave: linear-gradient(135deg, #2C3E50 0%, #34495E 100%);
+  
+  /* --- Sombras --- */
+  --sombra-suave: 0 2px 5px rgba(0, 0, 0, 0.3);
+  --sombra-media: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --sombra-fuerte: 0 8px 20px rgba(0, 0, 0, 0.5);
+  --sombra-primario: 0 5px 15px rgba(74, 144, 226, 0.3);
+  --sombra-acento: 0 5px 15px rgba(93, 173, 226, 0.3);
+  --sombra-secundario: 0 3px 8px rgba(244, 196, 48, 0.3);
+  
+  /* --- Opacidades de Colores --- */
+  --primario-10: rgba(74, 144, 226, 0.1);
+  --primario-20: rgba(74, 144, 226, 0.2);
+  --primario-30: rgba(74, 144, 226, 0.3);
+  --primario-40: rgba(74, 144, 226, 0.4);
+  
+  --secundario-10: rgba(244, 196, 48, 0.1);
+  --secundario-20: rgba(244, 196, 48, 0.2);
+  --secundario-30: rgba(244, 196, 48, 0.3);
+  --secundario-40: rgba(244, 196, 48, 0.4);
+  
+  --acento-10: rgba(93, 173, 226, 0.1);
+  --acento-20: rgba(93, 173, 226, 0.2);
+  --acento-30: rgba(93, 173, 226, 0.3);
+  --acento-40: rgba(93, 173, 226, 0.4);
 }
 
 html, body { height: 100%; }
 body { 
   margin: 0; 
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: var(--fuente-principal);
   background-color: var(--color-fondo-claro);
   color: var(--color-texto);
+  transition: background-color var(--transicion-media), color var(--transicion-media);
 }
+
+/* ========================================
+   UTILIDADES GLOBALES
+   ======================================== */
+
+/* Clase para gradiente primario */
+.bg-gradiente-primario {
+  background: var(--gradiente-primario);
+}
+
+/* Clase para gradiente de acento */
+.bg-gradiente-acento {
+  background: var(--gradiente-acento);
+}
+
+/* Clase para texto con color primario */
+.texto-primario {
+  color: var(--color-primario);
+}
+
+/* Clase para texto con color secundario */
+.texto-secundario {
+  color: var(--color-secundario);
+}
+
+/* Clase para texto con color de acento */
+.texto-acento {
+  color: var(--color-acento);
+}
+
+/* ========================================
+   BOTÓN DE CAMBIO DE TEMA
+   ======================================== */
+
+.theme-toggle {
+  position: fixed;
+  bottom: var(--espacio-lg);
+  right: var(--espacio-lg);
+  width: 60px;
+  height: 60px;
+  background: var(--gradiente-primario);
+  border: none;
+  border-radius: 50%;
+  box-shadow: var(--sombra-fuerte);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8em;
+  color: var(--color-blanco);
+  transition: transform var(--transicion-rapida), box-shadow var(--transicion-rapida);
+  z-index: 1000;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.theme-toggle:active {
+  transform: scale(0.95);
+}
+
+

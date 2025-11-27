@@ -3,6 +3,7 @@ import { AvailableRoomsComponent } from './available-rooms/available-rooms';
 import { HomeComponent } from './home/home';
 import { RoomsComponent } from './rooms/rooms';
 import { BookingConfirmationComponent } from './booking-confirmation/booking-confirmation';
+import { MyBookingsComponent } from './my-bookings/my-bookings';
 
 export const routes: Routes = [
   {
@@ -24,5 +25,10 @@ export const routes: Routes = [
     path: 'confirmacion-reserva',
     component: BookingConfirmationComponent,
     title: 'Confirmación de Reserva'
+  },
+  {
+    path: 'mis-reservas',
+    component: MyBookingsComponent,
+    title: 'Mis Reservaciones'
   }
 ];

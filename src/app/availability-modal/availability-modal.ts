@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -13,9 +13,11 @@ import { ClientService, Client } from '../client.service';
   templateUrl: './availability-modal.html',
   styleUrls: ['./availability-modal.css']
 })
-export class AvailabilityModalComponent {
+export class AvailabilityModalComponent implements OnInit {
   @Input() roomId: string = '';
   @Input() roomName: string = '';
+  @Input() prefilledCheckIn?: string;
+  @Input() prefilledCheckOut?: string;
   @Output() close = new EventEmitter<void>();
 
   checkIn: string = '';
@@ -48,12 +50,24 @@ export class AvailabilityModalComponent {
     // Establecer fecha mínima como hoy
     const today = new Date();
     this.minDate = today.toISOString().split('T')[0];
-    this.checkIn = this.minDate;
-    
-    // Fecha de salida por defecto: mañana
-    const tomorrow = new Date(today);
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    this.checkOut = tomorrow.toISOString().split('T')[0];
+  }
+
+  ngOnInit(): void {
+    // Usar fechas pre-llenadas si están disponibles, sino usar fechas por defecto
+    if (this.prefilledCheckIn && this.prefilledCheckOut) {
+      this.checkIn = this.prefilledCheckIn;
+      this.checkOut = this.prefilledCheckOut;
+      // Buscar disponibilidad automáticamente
+      this.searchAvailability();
+    } else {
+      // Fechas por defecto
+      const today = new Date();
+      this.checkIn = this.minDate;
+      
+      const tomorrow = new Date(today);
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      this.checkOut = tomorrow.toISOString().split('T')[0];
+    }
   }
 
   onCheckInChange(): void {
@@ -154,7 +168,89 @@ export class AvailabilityModalComponent {
     this.showClientForm = true;
   }
 
-  // Crear cliente y proceder con la reserva
+  // Crear cliente y completar la reserva en un solo paso
+  createClientAndCompleteBooking(): void {
+    // Validar que todos los campos estén llenos
+    if (!this.client.name || !this.client.lastName || !this.client.email || !this.client.phoneNumber) {
+      this.errorMessage = 'Por favor complete todos los campos del formulario';
+      return;
+    }
+
+    // Validar formato de email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(this.client.email)) {
+      this.errorMessage = 'Por favor ingrese un email válido';
+      return;
+    }
+
+    this.isCreatingClient = true;
+    this.errorMessage = '';
+
+    console.log('📝 Datos del cliente a enviar:', this.client);
+
+    // Paso 1: Crear el cliente
+    this.clientService.createClient(this.client).subscribe({
+      next: (createdClient) => {
+        console.log('✅ Cliente creado/encontrado:', createdClient);
+        console.log('📌 ID del cliente:', createdClient.id);
+        
+        // Guardar el ID del cliente en el servicio de booking
+        if (createdClient && createdClient.id) {
+          this.bookingService.setClient(createdClient.id);
+          console.log('💾 Cliente ID guardado en BookingService');
+          
+          this.clientCreated = true;
+          this.isCreatingClient = false;
+          
+          // Paso 2: Crear la reserva inmediatamente
+          this.isCreatingBooking = true;
+          
+          this.bookingService.createBooking().subscribe({
+            next: (response) => {
+              console.log('✅ Reserva creada exitosamente:', response);
+              
+              this.isCreatingBooking = false;
+              
+              // Cerrar el modal
+              this.closeModal();
+              
+              // Redirigir a la página de confirmación
+              this.router.navigate(['/confirmacion-reserva']);
+            },
+            error: (error) => {
+              console.error('❌ Error al crear la reserva:', error);
+              this.errorMessage = 'Error al crear la reserva. Por favor intente nuevamente.';
+              this.isCreatingBooking = false;
+            }
+          });
+        } else {
+          console.warn('⚠️ El servidor no devolvió un ID de cliente');
+          this.errorMessage = 'Error al procesar el cliente. Por favor intente nuevamente.';
+          this.isCreatingClient = false;
+        }
+      },
+      error: (error) => {
+        console.error('❌ Error completo al crear cliente:', error);
+        
+        let errorMsg = 'Error al crear el cliente. ';
+        
+        if (error.status === 0) {
+          errorMsg += 'No se puede conectar con el servidor. Verifique que el backend esté ejecutándose.';
+        } else if (error.status === 400) {
+          errorMsg += 'Datos inválidos. ' + (error.error?.message || '');
+        } else if (error.status === 500) {
+          errorMsg += 'Error interno del servidor.';
+        } else {
+          errorMsg += 'Por favor intente nuevamente.';
+        }
+        
+        this.errorMessage = errorMsg;
+        this.isCreatingClient = false;
+      }
+    });
+  }
+
+  // Crear cliente y proceder con la reserva (MÉTODO ORIGINAL - mantenido por compatibilidad)
   createClientAndBook(): void {
     // Validar que todos los campos estén llenos
     if (!this.client.name || !this.client.lastName || !this.client.email || !this.client.phoneNumber) {

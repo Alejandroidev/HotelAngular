@@ -10,9 +10,34 @@
     </div>
 
     <div class="rooms-grid" *ngIf="!isLoading">
-      <div *ngFor="let room of allRooms" class="room-card" [class.featured]="room.isFeatured">
-        <div class="featured-badge" *ngIf="room.isFeatured">
-          ⭐ Destacada
+      <div *ngFor="let room of allRooms" class="room-card" 
+           [class.featured]="isCheapestOfType(room.id)"
+           [class.recommended]="hasMostAmenities(room.id)">
+        
+        <!-- Si tiene AMBOS: mostrar badge Premium especial -->
+        <div class="badges-container premium" *ngIf="isCheapestOfType(room.id) && hasMostAmenities(room.id)">
+          <div class="featured-badge premium-badge">
+            ⭐ Premium - Mejor Opción
+          </div>
+        </div>
+        
+        <!-- Si tiene solo uno o el otro: mostrar badges normales -->
+        <div class="badges-container" *ngIf="!(isCheapestOfType(room.id) && hasMostAmenities(room.id))">
+          <div class="featured-badge best-price" *ngIf="isCheapestOfType(room.id)">
+            💎 Mejor Precio
+          </div>
+          <div class="featured-badge recommended" *ngIf="hasMostAmenities(room.id)">
+            🌟 Recomendado
+          </div>
+        </div>
+        
+        <!-- Imagen de la habitación -->
+        <div class="room-image">
+          <img 
+            [src]="'https://images.unsplash.com/photo-' + getRoomImageId(room.description) + '?w=600&h=400&fit=crop&q=80'" 
+            [alt]="room.description"
+            (error)="onImageError($event)"
+            loading="lazy">
         </div>
         
         <div class="room-header">
@@ -45,7 +70,6 @@
           <button class="availability-btn" (click)="searchAvailability(room)">
             🔍 Buscar Disponibilidad
           </button>
-          <button class="reserve-btn">Reservar Ahora</button>
         </div>
       </div>
     </div>

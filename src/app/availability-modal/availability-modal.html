@@ -134,26 +134,13 @@
             </button>
             <button 
               type="button" 
-              class="submit-btn" 
-              (click)="createClientAndBook()" 
-              [disabled]="isCreatingClient || clientCreated"
-              *ngIf="!clientCreated">
-              <span *ngIf="!isCreatingClient">Guardar Datos</span>
-              <span *ngIf="isCreatingClient">Procesando...</span>
+              class="submit-btn primary-action" 
+              (click)="createClientAndCompleteBooking()" 
+              [disabled]="isCreatingClient || isCreatingBooking">
+              <span *ngIf="!isCreatingClient && !isCreatingBooking">✓ Finalizar Reserva</span>
+              <span *ngIf="isCreatingClient">Guardando datos...</span>
+              <span *ngIf="isCreatingBooking">Finalizando reserva...</span>
             </button>
-            <button 
-              type="button" 
-              class="finalize-btn" 
-              (click)="finalizeBooking()" 
-              [disabled]="isCreatingBooking"
-              *ngIf="clientCreated">
-              <span *ngIf="!isCreatingBooking">✓ Finalizar Reserva</span>
-              <span *ngIf="isCreatingBooking">Finalizando...</span>
-            </button>
-          </div>
-          
-          <div class="success-notification" *ngIf="clientCreated && !isCreatingBooking">
-            <span class="check-icon">✓</span> Datos guardados correctamente. Haga clic en "Finalizar Reserva" para confirmar.
           </div>
         </form>
       </div>

@@ -11,6 +11,13 @@
         ⭐ Destacada
       </div>
       
+      <div class="room-image">
+        <img 
+          [src]="'https://images.unsplash.com/photo-' + getRoomImageId(room.name) + '?w=500&h=350&fit=crop'" 
+          [alt]="room.name"
+          (error)="onImageError($event)">
+      </div>
+      
       <div class="room-header">
         <h3>{{ room.name }}</h3>
       </div>
@@ -35,7 +42,6 @@
         <button class="availability-btn" (click)="searchAvailability(room)">
           🔍 Buscar Disponibilidad
         </button>
-        <button class="reserve-btn">Reservar Ahora</button>
       </div>
     </div>
   </div>

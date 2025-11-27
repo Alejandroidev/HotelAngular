@@ -1,0 +1,116 @@
+<div class="my-bookings-container">
+  <div class="page-header">
+    <h1>Mis Reservaciones</h1>
+    <p class="subtitle">Gestiona tus reservas en Hotel U Colombia</p>
+  </div>
+
+  <div *ngIf="isLoading" class="loading">
+    <div class="spinner"></div>
+    <p>Cargando tus reservas...</p>
+  </div>
+
+  <div *ngIf="!isLoading && bookings.length === 0" class="no-bookings">
+    <div class="empty-state">
+      <i class="icon-calendar">📅</i>
+      <h2>No tienes reservas</h2>
+      <p>Aún no has realizado ninguna reserva con nosotros.</p>
+      <a routerLink="/habitaciones" class="btn-primary">Ver Habitaciones</a>
+    </div>
+  </div>
+
+  <div *ngIf="!isLoading && bookings.length > 0" class="bookings-list">
+    <div *ngFor="let booking of bookings" class="booking-card" [class]="getStatusClass(booking.status)">
+      
+      <!-- Header de la tarjeta -->
+      <div class="booking-header">
+        <div class="booking-id">
+          <span class="label">Reserva #</span>
+          <span class="value">{{ booking.id }}</span>
+        </div>
+        <div class="booking-status" [class]="getStatusClass(booking.status)">
+          <span *ngIf="booking.status === 'confirmada'">✓ Confirmada</span>
+          <span *ngIf="booking.status === 'pendiente'">⏱ Pendiente</span>
+          <span *ngIf="booking.status === 'cancelada'">✗ Cancelada</span>
+        </div>
+      </div>
+
+      <!-- Información de la habitación -->
+      <div class="booking-room">
+        <h3>{{ booking.roomName }}</h3>
+        <p class="room-type">{{ booking.roomType }}</p>
+      </div>
+
+      <!-- Detalles de la reserva -->
+      <div class="booking-details">
+        <div class="detail-row">
+          <div class="detail-item">
+            <span class="icon">📅</span>
+            <div class="detail-content">
+              <span class="detail-label">Check-in</span>
+              <span class="detail-value">{{ formatDate(booking.checkIn) }}</span>
+            </div>
+          </div>
+          <div class="detail-item">
+            <span class="icon">📅</span>
+            <div class="detail-content">
+              <span class="detail-label">Check-out</span>
+              <span class="detail-value">{{ formatDate(booking.checkOut) }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="detail-row">
+          <div class="detail-item">
+            <span class="icon">🌙</span>
+            <div class="detail-content">
+              <span class="detail-label">Noches</span>
+              <span class="detail-value">{{ calculateNights(booking.checkIn, booking.checkOut) }}</span>
+            </div>
+          </div>
+          <div class="detail-item">
+            <span class="icon">👥</span>
+            <div class="detail-content">
+              <span class="detail-label">Huéspedes</span>
+              <span class="detail-value">{{ booking.guests }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="detail-row">
+          <div class="detail-item">
+            <span class="icon">👤</span>
+            <div class="detail-content">
+              <span class="detail-label">Titular</span>
+              <span class="detail-value">{{ booking.clientName }}</span>
+            </div>
+          </div>
+          <div class="detail-item">
+            <span class="icon">✉️</span>
+            <div class="detail-content">
+              <span class="detail-label">Email</span>
+              <span class="detail-value">{{ booking.clientEmail }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Precio total -->
+      <div class="booking-price">
+        <span class="price-label">Total</span>
+        <span class="price-value">${{ booking.totalPrice.toLocaleString('es-CO') }} COP</span>
+      </div>
+
+      <!-- Acciones -->
+      <div class="booking-actions">
+        <button 
+          *ngIf="booking.status === 'confirmada'" 
+          class="btn-secondary"
+          (click)="cancelBooking(booking.id)">
+          Cancelar Reserva
+        </button>
+        <button class="btn-outline">Ver Detalles</button>
+        <button class="btn-outline">Descargar Comprobante</button>
+      </div>
+    </div>
+  </div>
+</div>

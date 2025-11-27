@@ -67,27 +67,202 @@
 }
 
 .room-card.featured {
+  border: 3px solid var(--color-secundario);
+  box-shadow: var(--sombra-secundario);
+  background: linear-gradient(to bottom, var(--color-blanco) 0%, var(--secundario-10) 100%);
+}
+
+.room-card.recommended {
   border: 3px solid var(--color-acento);
-  box-shadow: 0 8px 20px rgba(224, 122, 95, 0.4);
+  box-shadow: var(--sombra-acento);
+  background: linear-gradient(to bottom, var(--color-blanco) 0%, var(--acento-10) 100%);
+}
+
+/* Si tiene ambos badges (mejor precio Y más amenidades) */
+.room-card.featured.recommended {
+  border: 3px solid var(--color-primario);
+  box-shadow: var(--sombra-primario);
+  background: linear-gradient(135deg, var(--secundario-10) 0%, var(--acento-10) 100%);
+}
+
+/* Contenedor de badges - organiza los badges horizontalmente */
+.badges-container {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 90%;
 }
 
 .featured-badge {
-  position: absolute;
-  top: -12px;
-  right: 15px;
-  background: linear-gradient(135deg, var(--color-acento) 0%, var(--color-secundario) 100%);
-  color: white;
-  padding: 6px 18px;
+  color: var(--color-texto-sobre-oscuro);
+  padding: 8px 18px;
   border-radius: 25px;
   font-size: 0.9em;
   font-weight: 700;
-  box-shadow: 0 3px 10px rgba(224, 122, 95, 0.5);
-  z-index: 10;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  animation: badge-entrance 0.6s ease-out;
+}
+
+/* Animación de entrada para todos los badges */
+@keyframes badge-entrance {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.8);
+  }
+  60% {
+    transform: translateY(5px) scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Badge de Mejor Precio */
+.featured-badge.best-price {
+  background: linear-gradient(135deg, var(--color-secundario) 0%, #c89b3c 100%);
+  box-shadow: var(--sombra-secundario);
+  animation: pulse-glow-gold 2s ease-in-out infinite, badge-entrance 0.6s ease-out, float-gold 3s ease-in-out infinite;
+}
+
+/* Badge de Recomendado (más amenidades) */
+.featured-badge.recommended {
+  background: linear-gradient(135deg, var(--color-acento) 0%, var(--color-primario) 100%);
+  box-shadow: var(--sombra-acento);
+  animation: pulse-glow-blue 2s ease-in-out infinite, badge-entrance 0.6s ease-out 0.2s, float-blue 3s ease-in-out infinite 0.5s;
+}
+
+/* Badge Premium - cuando tiene AMBOS (mejor precio Y más amenidades) */
+.featured-badge.premium-badge {
+  background: linear-gradient(135deg, var(--color-primario) 0%, var(--color-secundario) 50%, var(--color-acento) 100%);
+  box-shadow: var(--sombra-primario);
+  padding: 10px 25px;
+  font-size: 1em;
+  animation: pulse-glow-premium 2s ease-in-out infinite, badge-entrance 0.6s ease-out, shimmer-premium 4s ease-in-out infinite;
+}
+
+/* Animación de pulso dorado */
+@keyframes pulse-glow-gold {
+  0%, 100% {
+    box-shadow: var(--sombra-secundario);
+  }
+  50% {
+    box-shadow: 0 5px 20px rgba(244, 196, 48, 0.6);
+  }
+}
+
+/* Animación de pulso azul */
+@keyframes pulse-glow-blue {
+  0%, 100% {
+    box-shadow: var(--sombra-acento);
+  }
+  50% {
+    box-shadow: 0 5px 20px rgba(93, 173, 226, 0.6);
+  }
+}
+
+/* Animación de pulso premium con escala */
+@keyframes pulse-glow-premium {
+  0%, 100% {
+    box-shadow: var(--sombra-primario);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 8px 25px rgba(10, 61, 98, 0.8), 0 0 30px rgba(244, 196, 48, 0.5);
+    transform: scale(1.05);
+  }
+}
+
+/* Animación de flotación dorada (sube y baja suavemente) */
+@keyframes float-gold {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+/* Animación de flotación azul */
+@keyframes float-blue {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+/* Animación de brillo deslizante para premium */
+@keyframes shimmer-premium {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+/* Efecto de brillo adicional para el badge premium */
+.featured-badge.premium-badge {
+  background: linear-gradient(
+    135deg, 
+    var(--color-primario) 0%, 
+    var(--color-secundario) 25%, 
+    var(--color-acento) 50%,
+    var(--color-secundario) 75%,
+    var(--color-primario) 100%
+  );
+  background-size: 200% auto;
 }
 
 .room-card:hover {
   transform: translateY(-8px);
   box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
+}
+
+/* Imagen de la habitación */
+.room-image {
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  position: relative;
+  background: linear-gradient(135deg, var(--primario-10) 0%, var(--acento-10) 100%);
+}
+
+.room-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.4s ease;
+}
+
+.room-card:hover .room-image img {
+  transform: scale(1.08);
+}
+
+/* Overlay sutil sobre la imagen */
+.room-image::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.1) 100%);
+  pointer-events: none;
 }
 
 .room-header {

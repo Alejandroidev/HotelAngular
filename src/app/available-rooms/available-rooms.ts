@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { RoomService, CheapestRoom } from '../room.service';
+import { AvailabilityModalComponent } from '../availability-modal/availability-modal';
 
 @Component({
   selector: 'app-available-rooms',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, AvailabilityModalComponent],
   templateUrl: './available-rooms.html',
   styleUrls: ['./available-rooms.css']
 })
@@ -19,6 +20,8 @@ export class AvailableRoomsComponent implements OnInit {
   isLoading: boolean = false;
   hasSearched: boolean = false;
   errorMessage: string = '';
+  showModal: boolean = false;
+  selectedRoom: CheapestRoom | null = null;
 
   // Fecha mínima es hoy
   minDate: string = '';
@@ -91,5 +94,43 @@ export class AvailableRoomsComponent implements OnInit {
       newCheckOut.setDate(newCheckOut.getDate() + 1);
       this.checkOut = newCheckOut.toISOString().split('T')[0];
     }
+  }
+
+  reserveRoom(room: CheapestRoom): void {
+    this.selectedRoom = room;
+    this.showModal = true;
+  }
+
+  closeModal(): void {
+    this.showModal = false;
+    this.selectedRoom = null;
+  }
+
+  // Método para obtener el ID de imagen según el tipo de habitación
+  getRoomImageId(roomName: string): string {
+    const name = roomName.toLowerCase();
+    
+    if (name.includes('estándar') || name.includes('estandar')) {
+      return 'gGC63y9H0U0'; // Habitación estándar elegante
+    } else if (name.includes('doble')) {
+      return 'KXkgQoEw_DU'; // Habitación doble
+    } else if (name.includes('suite')) {
+      return 'QRawWgV6gmo'; // Suite de lujo
+    } else if (name.includes('ejecutiva')) {
+      return 'ZqREbckCRQA'; // Habitación ejecutiva moderna
+    } else if (name.includes('presidencial')) {
+      return 'r_IBLz27FD8'; // Suite presidencial
+    } else if (name.includes('familiar')) {
+      return 'JR4Zw0IlPGQ'; // Habitación familiar
+    }
+    
+    // Imagen por defecto para habitaciones de hotel
+    return 'gGC63y9H0U0';
+  }
+
+  // Manejar error de carga de imagen
+  onImageError(event: Event): void {
+    const img = event.target as HTMLImageElement;
+    img.src = 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=500&h=350&fit=crop';
   }
 }
